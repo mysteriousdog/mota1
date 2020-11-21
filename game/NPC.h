@@ -2,27 +2,28 @@
 #define __NPC_H__
 
 #include "MTGame.h"
+#include "scripting/deprecated/CCDictionary.h"
 
 using namespace cocos2d;
 
-class NPC : public CCObject
+class NPC : public Ref
 {
 public:
-	//构造函数中要根据传递的属性表初始化各个变量
-	NPC(CCStringToStringDictionary *dict, int x, int y);
+	//锟斤拷锟届函锟斤拷锟斤拷要锟斤拷锟捷达拷锟捷碉拷锟斤拷锟皆憋拷锟斤拷始锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+	NPC(__Dictionary *dict, int x, int y);
 	~NPC(void);
-	//用于显示npc的精灵
-	CCSprite *npcSprite;
-	//保存在TileMap中配置的name项
-	CCString *npcId;
-	//npc所在的TileMap坐标
-	CCPoint tileCoord;
-	//图片纹理的文件路径
-	CCString *imagePath;
-	//纹理的Rect
-	CCRect rect;
-	//对应配置中的type项
-	CCString *type;
+	//锟斤拷锟斤拷锟斤拷示npc锟侥撅拷锟斤拷
+	Sprite *npcSprite;
+	//锟斤拷锟斤拷锟斤拷TileMap锟斤拷锟斤拷锟矫碉拷name锟斤拷
+	__String *npcId;
+	//npc锟斤拷锟节碉拷TileMap锟斤拷锟斤拷
+	Point tileCoord;
+	//图片锟斤拷锟斤拷锟斤拷锟侥硷拷路锟斤拷
+	__String *imagePath;
+	//锟斤拷锟斤拷锟斤拷Rect
+	Rect rect;
+	//锟斤拷应锟斤拷锟斤拷锟叫碉拷type锟斤拷
+	__String *type;
 };
 
 #endif
