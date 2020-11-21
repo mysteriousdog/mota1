@@ -7,55 +7,55 @@ using namespace cocos2d;
 
 class Teleport;
 
-//ÓÂÊ¿Àà¼Ì³Ð×ÔCCNode
-class Hero : public cocos2d::CCNode
+//ï¿½ï¿½Ê¿ï¿½ï¿½Ì³ï¿½ï¿½ï¿½CCNode
+class Hero : public Node
 {
 public:
 	Hero(void);
 	~Hero(void);
-	//¾²Ì¬·½·¨£¬ÓÃÓÚ´´½¨ÓÂÊ¿ÊµÀý
+	//ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿Êµï¿½ï¿½
 	static Hero *heroWithinLayer();
-	//ÈÃÓÂÊ¿ÏòÖ¸¶¨·½ÏòÒÆ¶¯Ò»¸ñ
+	//ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½Ò»ï¿½ï¿½
 	void move(HeroDirection direction);
-	//ÉèÖÃÓÂÊ¿³¯Ïò
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ï¿½
 	void setFaceDirection(HeroDirection direction);
-	//¿ªÊ¼Õ½¶·Âß¼­
+	//ï¿½ï¿½Ê¼Õ½ï¿½ï¿½ï¿½ß¼ï¿½
 	void fight();
-	//±êÊ¶ÓÂÊ¿ÊÇ·ñÔÚÒÆ¶¯×´Ì¬
+	//ï¿½ï¿½Ê¶ï¿½ï¿½Ê¿ï¿½Ç·ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½×´Ì¬
 	bool isHeroMoving;
-	//±êÊ¶ÓÂÊ¿ÊÇ·ñÔÚÕ½¶·×´Ì¬
+	//ï¿½ï¿½Ê¶ï¿½ï¿½Ê¿ï¿½Ç·ï¿½ï¿½ï¿½Õ½ï¿½ï¿½×´Ì¬
 	bool isHeroFighting;
-	//±êÊ¶ÓÂÊ¿ÊÇ·ñÔÚ¿ªÃÅ×´Ì¬
+	//ï¿½ï¿½Ê¶ï¿½ï¿½Ê¿ï¿½Ç·ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½×´Ì¬
 	bool isDoorOpening;
-	//Ê°È¡ÎïÆ·
+	//Ê°È¡ï¿½ï¿½Æ·
 	void pickUpItem();
-	//¿ªÃÅ
+	//ï¿½ï¿½ï¿½ï¿½
 	void openDoor(int targetDoorGID);
-	//¶ÔNPC½»»¥
+	//ï¿½ï¿½NPCï¿½ï¿½ï¿½ï¿½
 	void actWithNPC();
-	//´«ËÍ
+	//ï¿½ï¿½ï¿½ï¿½
 	void doTeleport(Teleport *teleport);
 protected:
-	//ÓÃÓÚÏÔÊ¾ÓÂÊ¿ÐÎÏóµÄ¾«Áé
-	CCSprite *heroSprite;
-	//ÁÙÊ±±£´æÄ¿±êµÄTilemap×ø±ê
-	CCPoint targetTileCoord;
-	//ÁÙÊ±±£´æÄ¿±êµÄcocos2d-x×ø±ê
-	CCPoint targetPosition;
-	//ÁÙÊ±±£´æÃÅÆðÊ¼µÄÍ¼¿éID
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½
+	Sprite *heroSprite;
+	//ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½Tilemapï¿½ï¿½ï¿½ï¿½
+	Point targetTileCoord;
+	//ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½cocos2d-xï¿½ï¿½ï¿½ï¿½
+	Point targetPosition;
+	//ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½Í¼ï¿½ï¿½ID
 	int targetDoorGID;
-	//ÏÔÊ¾Õ½¶·¶¯»­µÄ¾«Áé
-	CCSprite *fightSprite;
-	//³õÊ¼»¯·½·¨
+	//ï¿½ï¿½Ê¾Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¾ï¿½ï¿½ï¿½
+	Sprite *fightSprite;
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	bool heroInit();
-	//Õ½¶·Íê³ÉºóµÄ»Øµ÷º¯Êý
-	void onFightDone(CCNode* pTarget);
-	//Åö×²¼ì²â·½·¨
-	CollisionType checkCollision(CCPoint heroPosition);
-	//ÒÆ¶¯Íê³ÉºóµÄ»Øµ÷º¯Êý
-	void onMoveDone(CCNode* pTarget, void* data);
-	//¸üÐÂ¿ªÃÅ¶¯»­
-	void updateOpenDoorAnimation(ccTime dt);
+	//Õ½ï¿½ï¿½ï¿½ï¿½Éºï¿½Ä»Øµï¿½ï¿½ï¿½ï¿½ï¿½
+	void onFightDone(Node* pTarget);
+	//ï¿½ï¿½×²ï¿½ï¿½â·½ï¿½ï¿½
+	CollisionType checkCollision(Point heroPosition);
+	//ï¿½Æ¶ï¿½ï¿½ï¿½Éºï¿½Ä»Øµï¿½ï¿½ï¿½ï¿½ï¿½
+	void onMoveDone(Node* pTarget, void* data);
+	//ï¿½ï¿½ï¿½Â¿ï¿½ï¿½Å¶ï¿½ï¿½ï¿½
+	void updateOpenDoorAnimation(float dt);
 };
 
 #endif
