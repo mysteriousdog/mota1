@@ -5,16 +5,16 @@
 
 using namespace cocos2d;
 
-class Enemy : public CCObject
+class Enemy : public Ref
 {
 public:
 	Enemy(void);
 	~Enemy(void);
-	//怪物在TileMap上的方位
-	CCPoint position;
-	//怪物初始的图块ID
+	//锟斤拷锟斤拷锟斤拷TileMap锟较的凤拷位
+	Point position;
+	//锟斤拷锟斤拷锟绞硷拷锟酵硷拷锟絀D
 	int startGID;
-	//怪物在字典中的index
+	//锟斤拷锟斤拷锟斤拷锟街碉拷锟叫碉拷index
 	int index;
 };
 
