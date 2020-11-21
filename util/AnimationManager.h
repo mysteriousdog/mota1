@@ -10,21 +10,21 @@ class AnimationManager : public Singleton<AnimationManager>
 public:
 	AnimationManager();
 	~AnimationManager();
-	//³õÊ¼»¯¶¯»­Ä£°æ»º´æ±í
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½æ»ºï¿½ï¿½ï¿½
 	bool initAnimationMap();
-	//¸ù¾ÝÃû×ÖµÃµ½Ò»¸ö¶¯»­Ä£°å
-	CCAnimation* getAnimation(int key);
-	//´´½¨Ò»¸ö¶¯»­ÊµÀý
-	CCAnimate* createAnimate(int key);
-	//´´½¨Ò»¸ö¶¯»­ÊµÀý
-	CCAnimate* createAnimate(const char* key);
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÃµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+	Animation* getAnimation(int key);
+	//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
+	Animate* createAnimate(int key);
+	//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
+	Animate* createAnimate(const char* key);
 protected:
-	//¼ÓÔØÓÂÊ¿ÐÐ×ß¶¯»­Ä£°æ
-	CCAnimation* createHeroMovingAnimationByDirection(HeroDirection direction);
-	CCAnimation* createFightAnimation();
-	CCAnimation* createNPCAnimation();
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ß¶ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+	Animation* createHeroMovingAnimationByDirection(HeroDirection direction);
+	Animation* createFightAnimation();
+	Animation* createNPCAnimation();
 };
-//¶¨Òå¶¯»­¹ÜÀíÆ÷ÊµÀýµÄ±ðÃû
+//ï¿½ï¿½ï¿½å¶¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
 #define sAnimationMgr AnimationManager::instance()
 
 #endif

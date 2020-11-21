@@ -16,7 +16,7 @@
 // #include "game/GameMap.h"
 
 #include "util/Singleton.h"
-// #include "util/AnimationManager.h"
+#include "util/AnimationManager.h"
 #include "util/Global.h"
 
 #endif
