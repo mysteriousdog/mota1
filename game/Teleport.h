@@ -2,24 +2,25 @@
 #define __TELEPORT_H__
 
 #include "MTGame.h"
+#include "scripting/deprecated/CCDictionary.h"
 
 using namespace cocos2d;
 
-class Teleport : public CCObject
+class Teleport : public Ref
 {
 public:
-	Teleport(CCStringToStringDictionary *dict, int x, int y);
+	Teleport(__Dictionary *dict, int x, int y);
 	~Teleport(void);
-	//´«ËÍµãËùÔÚÎ»ÖÃ
-	CCPoint tileCoord;
-	//´«ËÍµ½Ä¿±ê²ãºó£¬ÓÂÊ¿ËùÔÚ×ø±ê
-	CCPoint heroTileCoord;
-	//Ä¿±êµØÍ¼µÄ²ãÊý
+	//ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+	Point tileCoord;
+	//ï¿½ï¿½ï¿½Íµï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	Point heroTileCoord;
+	//Ä¿ï¿½ï¿½ï¿½Í¼ï¿½Ä²ï¿½ï¿½ï¿½
 	int targetMap;
-	//Î¨Ò»µÄID
+	//Î¨Ò»ï¿½ï¿½ID
 	int index;
-	//Í¼Æ¬ÎÆÀíµÄÎÄ¼þÂ·¾¶
-	CCString *imagePath;
-	CCSprite *teleportSprite;
+	//Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½Â·ï¿½ï¿½
+	__String *imagePath;
+	Sprite *teleportSprite;
 };
 #endif

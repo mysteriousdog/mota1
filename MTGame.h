@@ -11,7 +11,7 @@
 
 // #include "game/Hero.h"
 // #include "game/Enemy.h"
-// #include "game/Teleport.h"
+#include "game/Teleport.h"
 // #include "game/NPC.h"
 // #include "game/GameMap.h"
 
