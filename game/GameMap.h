@@ -8,45 +8,45 @@ using namespace cocos2d;
 class NPC;
 class Teleport;
 
-//¼Ì³Ð×ÔCCTMXTIledMap
-class GameMap : public cocos2d::CCTMXTiledMap
+//ï¿½Ì³ï¿½ï¿½ï¿½CCTMXTIledMap
+class GameMap : public TMXTiledMap
 {
-	//Ö»¶Á±äÁ¿£¬»ñÈ¡¸÷Í¼²ã
-	CC_PROPERTY_READONLY(CCTMXLayer*, floorLayer, FloorLayer);
-	CC_PROPERTY_READONLY(CCTMXLayer*, wallLayer, WallLayer);
-	CC_PROPERTY_READONLY(CCTMXLayer*, enemyLayer, EnemyLayer);
-	CC_PROPERTY_READONLY(CCTMXLayer*, itemLayer, ItemLayer);
-	CC_PROPERTY_READONLY(CCTMXLayer*, doorLayer, DoorLayer);
+	//Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Í¼ï¿½ï¿½
+	CC_PROPERTY_READONLY(TMXLayer*, floorLayer, FloorLayer);
+	CC_PROPERTY_READONLY(TMXLayer*, wallLayer, WallLayer);
+	CC_PROPERTY_READONLY(TMXLayer*, enemyLayer, EnemyLayer);
+	CC_PROPERTY_READONLY(TMXLayer*, itemLayer, ItemLayer);
+	CC_PROPERTY_READONLY(TMXLayer*, doorLayer, DoorLayer);
 public:
 	GameMap(void);
 	~GameMap(void);
-	//¾²Ì¬·½·¨£¬ÓÃÓÚÉú³ÉGameMapÊµÀý
+	//ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½GameMapÊµï¿½ï¿½
 	static GameMap* gameMapWithTMXFile(const char *tmxFile);
-	//TiledMapºÍcocos2d-x×ø±êÏµÏà»¥×ª»»µÄ·½·¨
-	CCPoint tileCoordForPosition(CCPoint position);
-	CCPoint positionForTileCoord(CCPoint tileCoord);
-	void showEnemyHitEffect(CCPoint tileCoord);
-	//´æ·ÅµØÍ¼ÉÏ¹ÖÎï¡¢´«ËÍÃÅÒÔ¼°npc 
-	CCMutableArray<Enemy*> *enemyArray;
-	CCMutableDictionary<int, Teleport*> *teleportDict;
-	CCMutableDictionary<int, NPC*> *npcDict;
+	//TiledMapï¿½ï¿½cocos2d-xï¿½ï¿½ï¿½ï¿½Ïµï¿½à»¥×ªï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
+	Point tileCoordForPosition(Point position);
+	Point positionForTileCoord(Point tileCoord);
+	void showEnemyHitEffect(Point tileCoord);
+	//ï¿½ï¿½Åµï¿½Í¼ï¿½Ï¹ï¿½ï¿½ï¡¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½npc 
+	Vector<Enemy*> *enemyArray;
+	Map<int, Teleport*> *teleportDict;
+	Map<int, NPC*> *npcDict;
 protected:
-	//TiledMap¶îÍâµÄ³õÊ¼»¯·½·¨
+	//TiledMapï¿½ï¿½ï¿½ï¿½Ä³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	void extraInit();
-	//³õÊ¼»¯¹ÖÎïÊý×é
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	void initEnemy();
-	//³õÊ¼»¯¶ÔÏó
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	void initObject();
-	//¿ªÆô¸÷Í¼²ãµÄÎÆÀí¿¹¾â³Ý
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	void enableAnitiAliasForEachLayer();
-	//¸üÐÂ¹ÖÎï¶¯»­
-	void updateEnemyAnimation(ccTime dt);
-	//ÁÙÊ±±£´æÕ½¶·Ê±µÄ¹ÖÎï
-	CCSprite* fightingEnemy;
-	//ÁÙÊ±±£´æ´ò»÷´ÎÊý
+	//ï¿½ï¿½ï¿½Â¹ï¿½ï¿½ï¶¯ï¿½ï¿½
+	void updateEnemyAnimation(float dt);
+	//ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½Ê±ï¿½Ä¹ï¿½ï¿½ï¿½
+	Sprite* fightingEnemy;
+	//ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	int fightCount;
-	//¸üÐÂ¹ÖÎïÕ½¶·Ê±µÄÑÕÉ«×´Ì¬
-	void updateEnemyHitEffect(ccTime dt);
+	//ï¿½ï¿½ï¿½Â¹ï¿½ï¿½ï¿½Õ½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½É«×´Ì¬
+	void updateEnemyHitEffect(float dt);
 };
 
 #endif

@@ -14,14 +14,14 @@ typedef enum {
 
 typedef enum
 {
-	kNone = 1,//¿ÉÒÔÍ¨ÐÐ
+	kNone = 1,//ï¿½ï¿½ï¿½ï¿½Í¨ï¿½ï¿½
 	kWall,//Ç½
-	kEnemy,//µÐÈË
-} CollisionType;//Åö×²ÀàÐÍ
+	kEnemy,//ï¿½ï¿½ï¿½ï¿½
+} CollisionType;//ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
 
 using namespace cocos2d;
 
-class HelloWorld : public cocos2d::CCLayer
+class HelloWorld : public cocos2d::Layer
 {
 public:
 	HelloWorld();
@@ -30,35 +30,35 @@ public:
     virtual bool init();  
 
     // there's no 'id' in cpp, so we recommand to return the exactly class pointer
-    static cocos2d::CCScene* scene();
+    static cocos2d::Scene* scene();
     
     // a selector callback
-    virtual void menuCloseCallback(CCObject* pSender);
+    virtual void menuCloseCallback(Ref* pSender);
 
     // implement the "static node()" method manually
     LAYER_NODE_FUNC(HelloWorld);
 
-	CCTMXTiledMap *map;
+	TMXTiledMap *map;
 
-	CCSprite* heroSprite;
+	Sprite* heroSprite;
 	HeroDirection heroDirection;
-	CCAnimation **walkAnimation;
-	CCAnimation* createAnimationByDirection(HeroDirection direction);
+	Animation **walkAnimation;
+	Animation* createAnimationByDirection(HeroDirection direction);
 
-	void menuCallBackMove(CCObject* pSender);
+	void menuCallBackMove(Ref* pSender);
 
 	void setFaceDirection(HeroDirection direction);
-	void onWalkDone(CCNode* pTarget, void* data);
+	void onWalkDone(Ref* pTarget, void* data);
 
-	CCPoint tileCoordForPosition(CCPoint position);
-	CCPoint positionForTileCoord(CCPoint tileCoord);
+	Point tileCoordForPosition(Point position);
+	Point positionForTileCoord(Point tileCoord);
 
-	void setSceneScrollPosition(CCPoint position);
+	void setSceneScrollPosition(Point position);
 	bool isHeroWalking;
-	void update(ccTime dt);
-	CCPoint targetPosition;
+	void update(float dt);
+	Point targetPosition;
 
-	CollisionType checkCollision(CCPoint heroPosition);
+	CollisionType checkCollision(Point heroPosition);
 };
 
 #endif  // __HELLOWORLD_SCENE_H__

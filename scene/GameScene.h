@@ -1,21 +1,21 @@
 #ifndef __GAME_SCENE_H__
 #define __GAME_SCENE_H__
 
-//°üº¬¹«ÓÃÍ·ÎÄ¼þ
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½Ä¼ï¿½
 #include "MTGame.h"
-//Ê¹ÓÃcocos2dÃüÃû¿Õ¼ä
+//Ê¹ï¿½ï¿½cocos2dï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½
 using namespace cocos2d;
-//GameScene¼Ì³ÐCCScene
-class GameScene : public CCScene
+//GameSceneï¿½Ì³ï¿½CCScene
+class GameScene : public Scene
 {
 public:
 	GameScene(void);
 	~GameScene(void);
-	//¾²Ì¬·½·¨ÓÃÓÚ´´½¨ÐÂµÄÓÎÏ·Ö÷½çÃæµÄÊµÀý
-	static CCScene *playNewGame();
-	//³õÊ¼»¯º¯Êý
+	//ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
+	static Scene *playNewGame();
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	virtual bool init();
-	//SceneµÄ¾²Ì¬´´½¨·½·¨
+	//Sceneï¿½Ä¾ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	SCENE_NODE_FUNC(GameScene);
 	//
 	void switchMap();

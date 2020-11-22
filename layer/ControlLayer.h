@@ -5,19 +5,20 @@
 
 using namespace cocos2d;
 
-class ControlLayer: public CCLayer
+class ControlLayer: public Layer
 {
 public:
 	ControlLayer(void);
 	~ControlLayer(void);
-	//node·½·¨»áµ÷ÓÃ´Ëº¯Êý
+	//nodeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã´Ëºï¿½ï¿½ï¿½
 	virtual bool init();
-	//·½Ïò°´Å¥µã»÷ÊÂ¼þµÄ»Øµ÷
-	void menuCallBackMove(CCObject* pSender);
-	//¹Ø±Õ°´Å¥µã»÷ÊÂ¼þµÄ»Øµ÷
-	void menuCloseCallback(CCObject* pSender);
-	//Ê¹ÓÃCCLayer±ê×¼µÄ´´½¨ÊµÀýµÄ·½Ê½£¬ÉùÃ÷node·½·¨
-	LAYER_NODE_FUNC(ControlLayer);
+	//ï¿½ï¿½ï¿½ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Ä»Øµï¿½
+	void menuCallBackMove(Ref* pSender);
+	//ï¿½Ø±Õ°ï¿½Å¥ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½Ä»Øµï¿½
+	void menuCloseCallback(Ref* pSender);
+	//Ê¹ï¿½ï¿½CCLayerï¿½ï¿½×¼ï¿½Ä´ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½Ä·ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½nodeï¿½ï¿½ï¿½ï¿½
+	//LAYER_NODE_FUNC(ControlLayer);
+	CREATE_FUNC(ControlLayer);
 };
 
 #endif
