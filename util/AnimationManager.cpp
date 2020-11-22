@@ -8,138 +8,145 @@ AnimationManager::AnimationManager()
 
 AnimationManager::~AnimationManager()
 {
-	//CCDirector»á×Ô¼ºÇå³ýAnimationCache
-	//CCAnimationCache::purgeSharedAnimationCache();
+	//CCDirectorï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½AnimationCache
+	//AnimationCache::purgeSharedAnimationCache();
 }
 
 bool AnimationManager::initAnimationMap()
 {
 	char temp[20];
 	sprintf(temp, "%d", aDown);
-	//¼ÓÔØÓÂÊ¿ÏòÏÂ×ßµÄ¶¯»­
-	CCAnimationCache::sharedAnimationCache()->addAnimation(createHeroMovingAnimationByDirection(kDown), temp);
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ï¿½ï¿½ßµÄ¶ï¿½ï¿½ï¿½
+	//AnimationCache::sharedAnimationCache()->addAnimation(createHeroMovingAnimationByDirection(kDown), temp);
+	AnimationCache::getInstance()->addAnimation(createHeroMovingAnimationByDirection(kDown), temp);
 	sprintf(temp, "%d", aRight);
-	//¼ÓÔØÓÂÊ¿ÏòÓÒ×ßµÄ¶¯»­
-	CCAnimationCache::sharedAnimationCache()->addAnimation(createHeroMovingAnimationByDirection(kRight), temp);
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ï¿½ï¿½ßµÄ¶ï¿½ï¿½ï¿½
+	//AnimationCache::sharedAnimationCache()->addAnimation(createHeroMovingAnimationByDirection(kRight), temp);
+	AnimationCache::getInstance()->addAnimation(createHeroMovingAnimationByDirection(kRight), temp);
 	sprintf(temp, "%d", aLeft);
-	//¼ÓÔØÓÂÊ¿Ïò×ó×ßµÄ¶¯»­
-	CCAnimationCache::sharedAnimationCache()->addAnimation(createHeroMovingAnimationByDirection(kLeft), temp);
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ï¿½ï¿½ßµÄ¶ï¿½ï¿½ï¿½
+	//AnimationCache::sharedAnimationCache()->addAnimation(createHeroMovingAnimationByDirection(kLeft), temp);
+	AnimationCache::getInstance()->addAnimation(createHeroMovingAnimationByDirection(kLeft), temp);
 	sprintf(temp, "%d", aUp);
-	//¼ÓÔØÓÂÊ¿ÏòÉÏ×ßµÄ¶¯»­
-	CCAnimationCache::sharedAnimationCache()->addAnimation(createHeroMovingAnimationByDirection(kUp), temp);
-	//¼ÓÔØÕ½¶·¶¯»­
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ï¿½ï¿½ßµÄ¶ï¿½ï¿½ï¿½
+	//AnimationCache::sharedAnimationCache()->addAnimation(createHeroMovingAnimationByDirection(kUp), temp);
+	AnimationCache::getInstance()->addAnimation(createHeroMovingAnimationByDirection(kUp), temp);
+	//ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	sprintf(temp, "%d", aFight);
-	CCAnimationCache::sharedAnimationCache()->addAnimation(createFightAnimation(), temp);
-	//¼ÓÔØNPC¶¯»­
-	CCAnimationCache::sharedAnimationCache()->addAnimation(createNPCAnimation(), "npc0");
+	//AnimationCache::sharedAnimationCache()->addAnimation(createFightAnimation(), temp);
+	AnimationCache::getInstance()->addAnimation(createFightAnimation(), temp);
+	//ï¿½ï¿½ï¿½ï¿½NPCï¿½ï¿½ï¿½ï¿½
+	//AnimationCache::sharedAnimationCache()->addAnimation(createNPCAnimation(), "npc0");
+	AnimationCache::getInstance()->addAnimation(createNPCAnimation(), "npc0");
 	return true;
 }
 
-CCAnimation* AnimationManager::createHeroMovingAnimationByDirection(HeroDirection direction)
+Animation* AnimationManager::createHeroMovingAnimationByDirection(HeroDirection direction)
 {
-	CCTexture2D *heroTexture = CCTextureCache::sharedTextureCache()->addImage("hero.png");
-	CCSpriteFrame *frame0, *frame1, *frame2, *frame3;
-	//µÚ¶þ¸ö²ÎÊý±íÊ¾ÏÔÊ¾ÇøÓòµÄx, y, width, height£¬¸ù¾ÝdirectionÀ´È·¶¨ÏÔÊ¾µÄy×ø±ê
-	frame0 = CCSpriteFrame::frameWithTexture(heroTexture, cocos2d::CCRectMake(32*0, 32*direction, 32, 32));
-	frame1 = CCSpriteFrame::frameWithTexture(heroTexture, cocos2d::CCRectMake(32*1, 32*direction, 32, 32));
-	frame2 = CCSpriteFrame::frameWithTexture(heroTexture, cocos2d::CCRectMake(32*2, 32*direction, 32, 32));
-	frame3 = CCSpriteFrame::frameWithTexture(heroTexture, cocos2d::CCRectMake(32*3, 32*direction, 32, 32));
-	CCMutableArray<CCSpriteFrame*>* animFrames = new CCMutableArray<CCSpriteFrame*>(4);
-	animFrames->addObject(frame0);
-	animFrames->addObject(frame1);
-	animFrames->addObject(frame2);
-	animFrames->addObject(frame3);
-	CCAnimation* animation = new CCAnimation();
-	//0.05f±íÊ¾Ã¿Ö¡¶¯»­¼äµÄ¼ä¸ô
-	animation->initWithFrames(animFrames, 0.05f);
-	animFrames->release();
+	//auto *heroTexture = TextureCache::sharedTextureCache()->addImage("hero.png");
+	auto *heroTexture = Director::getInstance()->getTextureCache()->addImage("hero.png");
+	SpriteFrame *frame0, *frame1, *frame2, *frame3;
+	//ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½x, y, width, heightï¿½ï¿½ï¿½ï¿½ï¿½ï¿½directionï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½yï¿½ï¿½ï¿½ï¿½
+	frame0 = SpriteFrame::createWithTexture(heroTexture, Rect(32*0, 32*direction, 32, 32));
+	frame1 = SpriteFrame::createWithTexture(heroTexture, Rect(32*1, 32*direction, 32, 32));
+	frame2 = SpriteFrame::createWithTexture(heroTexture, Rect(32*2, 32*direction, 32, 32));
+	frame3 = SpriteFrame::createWithTexture(heroTexture, Rect(32*3, 32*direction, 32, 32));
+	Vector<SpriteFrame*>* animFrames = new Vector<SpriteFrame*>(4);
+	animFrames->pushBack(frame0);
+	animFrames->pushBack(frame1);
+	animFrames->pushBack(frame2);
+	animFrames->pushBack(frame3);
+	Animation* animation = new Animation();
+	//0.05fï¿½ï¿½Ê¾Ã¿Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½
+	animation->createWithSpriteFrames(*animFrames, 0.05f);
+	//animFrames->release();
 
 	return animation;
 }
 
-//´´½¨Õ½¶·¶¯»­Ä£°å
-CCAnimation* AnimationManager::createFightAnimation()
+//ï¿½ï¿½ï¿½ï¿½Õ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+Animation* AnimationManager::createFightAnimation()
 {
-	//¶¨ÒåÃ¿Ö¡µÄÐòºÅ
+	//ï¿½ï¿½ï¿½ï¿½Ã¿Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½
 	int fightAnim[] = 
 	{
 		4,6,8,10,13,15,17,19,20,22
 	};
-	CCMutableArray<CCSpriteFrame*>* animFrames = new CCMutableArray<CCSpriteFrame*>();
-	CCTexture2D *texture = CCTextureCache::sharedTextureCache()->addImage("sword.png");
-	CCSpriteFrame *frame;
+	Vector<SpriteFrame*>* animFrames = new Vector<SpriteFrame*>();
+	auto *texture = Director::getInstance()->getTextureCache()->addImage("sword.png");
+	SpriteFrame *frame;
 	int x, y;
 	for (int i = 0; i < 10; i++) 
 	{
-		//¼ÆËãÃ¿Ö¡ÔÚÕû¸öÎÆÀíÖÐµÄÆ«ÒÆÁ¿
+		//ï¿½ï¿½ï¿½ï¿½Ã¿Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½Æ«ï¿½ï¿½ï¿½ï¿½
 		x = fightAnim[i] % 5 - 1;
 		y = fightAnim[i] / 5;
-		frame = CCSpriteFrame::frameWithTexture(texture, cocos2d::CCRectMake(192*x, 192*y, 192, 192));
-		//µÚ17ºÍ19Ö¡ÔÚy·½ÏòÉÏÓÐ-8µÄÆ«ÒÆ
+		frame = SpriteFrame::createWithTexture(texture, Rect(192*x, 192*y, 192, 192));
+		//ï¿½ï¿½17ï¿½ï¿½19Ö¡ï¿½ï¿½yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-8ï¿½ï¿½Æ«ï¿½ï¿½
 		if (fightAnim[i] == 17 || fightAnim[i] == 19)
 		{
-			frame->setOffsetInPixels( ccp(0, -8) );
+			frame->setOffsetInPixels( Vec2(0, -8) );
 		}
-		animFrames->addObject(frame);
+		animFrames->pushBack(frame);
 	}
-	CCAnimation* animation = new CCAnimation();
-	animation->initWithFrames(animFrames, 0.1f);
-	animFrames->release();
+	Animation* animation = new Animation();
+	animation->createWithSpriteFrames(*animFrames, 0.1f);
+	//animFrames->release();
 	return animation;
 }
 
-CCAnimation* AnimationManager::createNPCAnimation()
+Animation* AnimationManager::createNPCAnimation()
 {
-	CCTexture2D *heroTexture = CCTextureCache::sharedTextureCache()->addImage("npc.png");
-	CCSpriteFrame *frame0, *frame1, *frame2, *frame3;
-	//µÚ¶þ¸ö²ÎÊý±íÊ¾ÏÔÊ¾ÇøÓòµÄx, y, width, height£¬¸ù¾ÝdirectionÀ´È·¶¨ÏÔÊ¾µÄy×ø±ê
-	frame0 = CCSpriteFrame::frameWithTexture(heroTexture, cocos2d::CCRectMake(32*0, 0, 32, 32));
-	frame1 = CCSpriteFrame::frameWithTexture(heroTexture, cocos2d::CCRectMake(32*1, 0, 32, 32));
-	frame2 = CCSpriteFrame::frameWithTexture(heroTexture, cocos2d::CCRectMake(32*2, 0, 32, 32));
-	frame3 = CCSpriteFrame::frameWithTexture(heroTexture, cocos2d::CCRectMake(32*3, 0, 32, 32));
-	CCMutableArray<CCSpriteFrame*>* animFrames = new CCMutableArray<CCSpriteFrame*>(4);
-	animFrames->addObject(frame0);
-	animFrames->addObject(frame1);
-	animFrames->addObject(frame2);
-	animFrames->addObject(frame3);
-	CCAnimation* animation = new CCAnimation();
-	//0.05f±íÊ¾Ã¿Ö¡¶¯»­¼äµÄ¼ä¸ô
-	animation->initWithFrames(animFrames, 0.2f);
-	animFrames->release();
+	auto *heroTexture = Director::getInstance()->getTextureCache()->addImage("npc.png");
+	SpriteFrame *frame0, *frame1, *frame2, *frame3;
+	//ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½x, y, width, heightï¿½ï¿½ï¿½ï¿½ï¿½ï¿½directionï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½yï¿½ï¿½ï¿½ï¿½
+	frame0 = SpriteFrame::createWithTexture(heroTexture, Rect(32*0, 0, 32, 32));
+	frame1 = SpriteFrame::createWithTexture(heroTexture, Rect(32*1, 0, 32, 32));
+	frame2 = SpriteFrame::createWithTexture(heroTexture, Rect(32*2, 0, 32, 32));
+	frame3 = SpriteFrame::createWithTexture(heroTexture, Rect(32*3, 0, 32, 32));
+	Vector<SpriteFrame*>* animFrames = new Vector<SpriteFrame*>(4);
+	animFrames->pushBack(frame0);
+	animFrames->pushBack(frame1);
+	animFrames->pushBack(frame2);
+	animFrames->pushBack(frame3);
+	Animation* animation = new Animation();
+	//0.05fï¿½ï¿½Ê¾Ã¿Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½
+	animation->createWithSpriteFrames(*animFrames, 0.2f);
+	//animFrames->release();
 
 	return animation;
 }
 
-//»ñÈ¡Ö¸¶¨¶¯»­Ä£°æ
-CCAnimation* AnimationManager::getAnimation(int key)
+//ï¿½ï¿½È¡Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+Animation* AnimationManager::getAnimation(int key)
 {
 	char temp[20];
 	sprintf(temp, "%d", key);
-	return CCAnimationCache::sharedAnimationCache()->animationByName(temp);
+	return AnimationCache::getInstance()->getAnimation(temp);
 }
 
-//»ñÈ¡Ò»¸öÖ¸¶¨¶¯»­Ä£°æµÄÊµÀý
-CCAnimate* AnimationManager::createAnimate(int key)
+//ï¿½ï¿½È¡Ò»ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½Êµï¿½ï¿½
+Animate* AnimationManager::createAnimate(int key)
 {
-	//»ñÈ¡Ö¸¶¨¶¯»­Ä£°æ
-	CCAnimation* anim = getAnimation(key);
+	//ï¿½ï¿½È¡Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+	Animation* anim = getAnimation(key);
 	if(anim)
 	{
-		//¸ù¾Ý¶¯»­Ä£°æÉú³ÉÒ»¸ö¶¯»­ÊµÀý
-		return cocos2d::CCAnimate::actionWithAnimation(anim);
+		//ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
+		return cocos2d::Animate::create(anim);
 	}
 	return NULL;
 }
 
-//»ñÈ¡Ò»¸öÖ¸¶¨¶¯»­Ä£°æµÄÊµÀý
-CCAnimate* AnimationManager::createAnimate(const char* key)
+//ï¿½ï¿½È¡Ò»ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½Êµï¿½ï¿½
+Animate* AnimationManager::createAnimate(const char* key)
 {
-	//»ñÈ¡Ö¸¶¨¶¯»­Ä£°æ
-	CCAnimation* anim = CCAnimationCache::sharedAnimationCache()->animationByName(key);
+	//ï¿½ï¿½È¡Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ï¿½
+	Animation* anim = AnimationCache::getInstance()->getAnimation(key);
 	if(anim)
 	{
-		//¸ù¾Ý¶¯»­Ä£°æÉú³ÉÒ»¸ö¶¯»­ÊµÀý
-		return cocos2d::CCAnimate::actionWithAnimation(anim);
+		//ï¿½ï¿½ï¿½Ý¶ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
+		return cocos2d::Animate::create(anim);
 	}
 	return NULL;
 }
