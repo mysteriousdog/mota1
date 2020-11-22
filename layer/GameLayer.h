@@ -22,7 +22,7 @@ public:
 	//��ʾtip
 	void showTip(const char *tip, Point position);
 
-	LAYER_NODE_FUNC(GameLayer);
+	CREATE_FUNC(GameLayer);
 protected:
 	GameMap *map;
 	Hero *hero;

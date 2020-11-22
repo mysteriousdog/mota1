@@ -4,10 +4,10 @@
 #include "cocos2d.h"
 #include "GameConstants.h"
 
-// #include "layer/ControlLayer.h"
-// #include "layer/GameLayer.h"
+#include "layer/ControlLayer.h"
+#include "layer/GameLayer.h"
 
-// #include "scene/GameScene.h"
+#include "scene/GameScene.h"
 
 #include "game/Hero.h"
 #include "game/Enemy.h"

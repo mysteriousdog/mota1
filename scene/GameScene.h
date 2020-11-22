@@ -16,7 +16,7 @@ public:
 	//��ʼ������
 	virtual bool init();
 	//Scene�ľ�̬��������
-	SCENE_NODE_FUNC(GameScene);
+	CREATE_FUNC(GameScene);
 	//
 	void switchMap();
 	void resetGameLayer();

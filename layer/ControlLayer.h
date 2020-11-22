@@ -13,9 +13,9 @@ public:
 	//node��������ô˺���
 	virtual bool init();
 	//����ť����¼��Ļص�
-	void menuCallBackMove(Ref* pSender);
+	void menuCallBackMove(Node* pSender);
 	//�رհ�ť����¼��Ļص�
-	void menuCloseCallback(Ref* pSender);
+	void menuCloseCallback(Node* pSender);
 	//ʹ��CCLayer��׼�Ĵ���ʵ���ķ�ʽ������node����
 	//LAYER_NODE_FUNC(ControlLayer);
 	CREATE_FUNC(ControlLayer);

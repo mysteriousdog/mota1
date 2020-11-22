@@ -12,48 +12,47 @@ ControlLayer::~ControlLayer(void)
 
 bool ControlLayer::init()
 {
-	if ( !CCLayer::init() )
+	if ( !Layer::init() )
 	{
 		return false;
 	}
 
-	//´´½¨¹Ø±Õ°´Å¥
-	CCMenuItemImage *pCloseItem = CCMenuItemImage::itemFromNormalImage(
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ø±Õ°ï¿½Å¥
+	MenuItemImage *pCloseItem = MenuItemImage::create(
 		"CloseNormal.png",
 		"CloseSelected.png",
-		this,
-		menu_selector(ControlLayer::menuCloseCallback));
-	pCloseItem->setPosition(ccp(CCDirector::sharedDirector()->getWinSize().width - 20, 20));
-	CCMenu* pMenu = CCMenu::menuWithItems(pCloseItem, NULL);
-	pMenu->setPosition(CCPointZero);
+		CC_CALLBACK_1(ControlLayer::menuCloseCallback, this));
+	pCloseItem->setPosition(Vec2(Director::getInstance()->getWinSize().width- 20, 20));
+	Menu* pMenu = Menu::create(pCloseItem, NULL);
+	pMenu->setPosition(Vec2());
 	this->addChild(pMenu, 1);
 
-	//´´½¨·½Ïò°´Å¥
-	CCMenuItem *down = CCMenuItemFont::itemFromString("down", this, menu_selector(ControlLayer::menuCallBackMove));
-	CCMenuItem *left = CCMenuItemFont::itemFromString("left", this, menu_selector(ControlLayer::menuCallBackMove) );
-	CCMenuItem *right = CCMenuItemFont::itemFromString("right", this, menu_selector(ControlLayer::menuCallBackMove) );
-	CCMenuItem *up = CCMenuItemFont::itemFromString("up", this, menu_selector(ControlLayer::menuCallBackMove) );
-	CCMenu* menu = CCMenu::menuWithItems(down, left, right, up, NULL);
-	//ÎªÁË·½±ã²éÕÒ£¬¸øÃ¿¸ömenuItemÉèÖÃtag
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¥
+	MenuItem *down = MenuItemFont::create("down",CC_CALLBACK_1(ControlLayer::menuCallBackMove, this));
+	MenuItem *left = MenuItemFont::create("left", CC_CALLBACK_1(ControlLayer::menuCallBackMove, this) );
+	MenuItem *right = MenuItemFont::create("right", CC_CALLBACK_1(ControlLayer::menuCallBackMove, this) );
+	MenuItem *up = MenuItemFont::create("up", CC_CALLBACK_1(ControlLayer::menuCallBackMove, this) );
+	Menu* menu = Menu::create(down, left, right, up, NULL);
+	//Îªï¿½Ë·ï¿½ï¿½ï¿½ï¿½ï¿½Ò£ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½menuItemï¿½ï¿½ï¿½ï¿½tag
 	down->setTag(kDown);
 	left->setTag(kLeft);
 	right->setTag(kRight);
 	up->setTag(kUp);
-	//²Ëµ¥Ïî°´¼ä¾à50Ë®Æ½ÅÅÁÐ
+	//ï¿½Ëµï¿½ï¿½î°´ï¿½ï¿½ï¿½50Ë®Æ½ï¿½ï¿½ï¿½ï¿½
 	menu->alignItemsHorizontallyWithPadding(50);
-	addChild(menu);
+	this->addChild(menu);
 	return true;
 }
 
-void ControlLayer::menuCloseCallback(CCObject* pSender)
+void ControlLayer::menuCloseCallback(Node* pSender)
 {
-    CCDirector::sharedDirector()->end();
+	Director::getInstance()->end();
 }
 
-void ControlLayer::menuCallBackMove(CCObject* pSender)
+void ControlLayer::menuCallBackMove(Node* pSender)
 {
-    CCNode *node = (CCNode *) pSender;
-	//°´Å¥µÄtag¾ÍÊÇÐèÒªÐÐ×ßµÄ·½Ïò
+    Node *node = (Node *) pSender;
+	//ï¿½ï¿½Å¥ï¿½ï¿½tagï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ßµÄ·ï¿½ï¿½ï¿½
 	int targetDirection = node->getTag();
 	sGlobal->hero->move((HeroDirection) targetDirection);
 }
