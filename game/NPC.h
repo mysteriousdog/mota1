@@ -10,20 +10,20 @@ class NPC : public Ref
 {
 public:
 	//���캯����Ҫ���ݴ��ݵ����Ա���ʼ����������
-	NPC(__Dictionary *dict, int x, int y);
+	NPC(Map<std::string, std::string> *dict, int x, int y);
 	~NPC(void);
 	//������ʾnpc�ľ���
 	Sprite *npcSprite;
 	//������TileMap�����õ�name��
-	__String *npcId;
+	std::string npcId;
 	//npc���ڵ�TileMap����
 	Point tileCoord;
 	//ͼƬ�������ļ�·��
-	__String *imagePath;
+	std::string imagePath;
 	//������Rect
 	Rect rect;
 	//��Ӧ�����е�type��
-	__String *type;
+	std::string type;
 };
 
 #endif

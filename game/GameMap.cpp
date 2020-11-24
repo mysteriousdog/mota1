@@ -166,7 +166,7 @@ Point GameMap::tileCoordForPosition(Point position)
 {
 	int x = position.x / this->getTileSize().width;
 	int y = (((this->getMapSize().height - 1) * this->getTileSize().height) - position.y) / this->getTileSize().height;
-	return ccp(x, y);
+	return Vec2(x, y);
 }
 
 //��Tilemap����ת��Ϊcocos2d-x����

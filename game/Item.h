@@ -2,7 +2,7 @@
 
 #include "cocos2d.h"
 
-class Item : public cocos2d::CCObject
+class Item : public cocos2d::Ref
 {
 public:
 	Item(void);

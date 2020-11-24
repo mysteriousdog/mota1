@@ -1,25 +1,30 @@
 #include "Teleport.h"
 
-Teleport::Teleport(CCStringToStringDictionary *dict, int x, int y)
+Teleport::Teleport(Map<std::string, std::string> *dict, *dict, int x, int y)
 {
-	CCPoint position = ccp(x, y);
-	//´«ËÍµãËùÔÚµÄTileMapÎ»ÖÃ
-	tileCoord = sGlobal->gameMap->tileCoordForPosition(ccp(x, y));
-	//µÃ³öÓÂÊ¿ÔÚÄ¿±ê²ãµÄÆðÊ¼Î»ÖÃ
+	auto position = Vec2(x, y);
+	//ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½Úµï¿½TileMapÎ»ï¿½ï¿½
+	tileCoord = sGlobal->gameMap->tileCoordForPosition(Vec2(x, y));
+	//ï¿½Ã³ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Î»ï¿½ï¿½
 	std::string key = "heroTileCoordX";
-	int x1 = dict->objectForKey(key)->toInt();
+	//int x1 = dict->objectForKey(key)->toInt();
+	int x1 = atoi(dict->at(key).c_str());
 	key = "heroTileCoordY";
-	int y1 = dict->objectForKey(key)->toInt();
-	heroTileCoord = ccp(x1, y1);
-	//È¡µÃÄ¿±êµØÍ¼µÄ²ãÊý
+	//int y1 = dict->objectForKey(key)->toInt();
+	int y1 = atoi(dict->at(key).c_str());
+	heroTileCoord = Vec2(x1, y1);
+	//È¡ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½Í¼ï¿½Ä²ï¿½ï¿½ï¿½
 	key = "targetMap";
-	targetMap = dict->objectForKey(key)->toInt();
-	//»ñÈ¡imageÏî
+	//targetMap = dict->objectForKey(key)->toInt();
+	targetMap = atoi(dict->at(key).c_str());
+	//ï¿½ï¿½È¡imageï¿½ï¿½
 	key = "image";
-	imagePath = dict->objectForKey(key);
-	//´´½¨ÓÃÓÚÏÔÊ¾TeleportµÄ¾«Áé
-	teleportSprite = CCSprite::spriteWithFile(imagePath->m_sString.c_str());
-	teleportSprite->setAnchorPoint(CCPointZero);
+	//imagePath = dict->objectForKey(key);
+	imagePath = dict->at(key);
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Teleportï¿½Ä¾ï¿½ï¿½ï¿½
+	teleportSprite = Sprite::createWithSpriteFrameName(imagePath); 
+	//spriteWithFile(imagePath->m_sString.c_str());
+	teleportSprite->setAnchorPoint(Vec2(0, 0));
 	teleportSprite->setPosition(position);
 	sGlobal->gameLayer->addChild(teleportSprite, kZTeleport);
 }

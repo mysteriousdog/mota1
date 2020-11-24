@@ -1,41 +1,42 @@
 #include "NPC.h"
 
-NPC::NPC(CCStringToStringDictionary *dict, int x, int y)
+NPC::NPC(Map<std::string, std::string> *dict, int x, int y)
 {
-	//»ñÈ¡Ãû³Æ
+	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 	std::string key = "name";
-	npcId = dict->objectForKey(key);
-	//»ñÈ¡ÀàÐÍ
+	npcId = dict->at(key);
+	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 	key = "type";
-	type = dict->objectForKey(key);
-	//»ñÈ¡imageÏî
+	type = dict->at(key);
+	//ï¿½ï¿½È¡imageï¿½ï¿½
 	key = "image";
-	imagePath = dict->objectForKey(key);
-	//»ñÈ¡rectXºÍrectY
+	imagePath = dict->at(key);
+	//ï¿½ï¿½È¡rectXï¿½ï¿½rectY
 	key = "rectX";
-	int x1 = dict->objectForKey(key)->toInt();
+	int x1 = atoi(dict->at(key).c_str());
 	key = "rectY";
-	int y1 = dict->objectForKey(key)->toInt();
-	rect = CCRectMake(x1, y1, 32, 32);
-	//positionÎªcocos2d-x×ø±ê£¬tileCoordÎªTileMap×ø±ê
-	CCPoint position = ccp(x, y);
+	int y1 = atoi(dict->at(key).c_str());
+	rect = Rect(x1, y1, 32, 32);
+	//positionÎªcocos2d-xï¿½ï¿½ï¿½ê£¬tileCoordÎªTileMapï¿½ï¿½ï¿½ï¿½
+	Vec2 position = Vec2(x, y);
 	tileCoord = sGlobal->gameMap->tileCoordForPosition(position);
-	//´´½¨ÓÃÓÚÏÔÊ¾npcµÄ¾«Áé
-	npcSprite = CCSprite::spriteWithFile(imagePath->m_sString.c_str(), rect);
-	npcSprite->setAnchorPoint(CCPointZero);
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾npcï¿½Ä¾ï¿½ï¿½ï¿½
+	//npcSprite = Sprite::spriteWithFile(imagePath->m_sString.c_str(), rect);
+	npcSprite = Sprite::createWithSpriteFrameName(imagePath);
+	npcSprite->setAnchorPoint(Vec2(0, 0));
 	npcSprite->setPosition(position);
 	sGlobal->gameLayer->addChild(npcSprite, kZNPC);
-	//´Ó¶¯»­¹ÜÀíÆ÷ÖÐ¸ù¾ÝnpcId»ñÈ¡¶¯»­£¬¿ªÊ¼ÓÀ¾Ã²¥·Å
-	CCAnimate* animation = sAnimationMgr->createAnimate(npcId->m_sString.c_str());
+	//ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¸ï¿½ï¿½ï¿½npcIdï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½
+	Animate* animation = sAnimationMgr->createAnimate(npcId.c_str());
 	if (animation != NULL) {
-		CCActionInterval* action = CCRepeatForever::actionWithAction(animation);
+		auto action = RepeatForever::create(animation);
 		npcSprite->runAction(action);
 	}
 }
 
 NPC::~NPC(void)
 {
-	//ÊÍ·ÅCCString¶ÔÏó
+	//ï¿½Í·ï¿½CCStringï¿½ï¿½ï¿½ï¿½
 	CC_SAFE_RELEASE(npcId)
 	CC_SAFE_RELEASE(imagePath)
 	CC_SAFE_RELEASE(type)
