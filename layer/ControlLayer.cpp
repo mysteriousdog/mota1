@@ -17,8 +17,8 @@ bool ControlLayer::init()
 		return false;
 	}
 
-	//�����رհ�ť
-	MenuItemImage *pCloseItem = MenuItemImage::create(
+	//�����رհ�
+	auto pCloseItem = MenuItemImage::create(
 		"CloseNormal.png",
 		"CloseSelected.png",
 		CC_CALLBACK_1(ControlLayer::menuCloseCallback, this));
@@ -44,12 +44,12 @@ bool ControlLayer::init()
 	return true;
 }
 
-void ControlLayer::menuCloseCallback(Node* pSender)
+void ControlLayer::menuCloseCallback(Ref* pSender)
 {
 	Director::getInstance()->end();
 }
 
-void ControlLayer::menuCallBackMove(Node* pSender)
+void ControlLayer::menuCallBackMove(Ref* pSender)
 {
     Node *node = (Node *) pSender;
 	//��ť��tag������Ҫ���ߵķ���
