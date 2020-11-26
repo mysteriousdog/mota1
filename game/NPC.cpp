@@ -1,21 +1,21 @@
 #include "NPC.h"
 
-NPC::NPC(Map<std::string, std::string> *dict, int x, int y)
+NPC::NPC(ValueMap *dict, int x, int y)
 {
 	//��ȡ����
 	std::string key = "name";
-	npcId = dict->at(key);
+	npcId = dict->at(key).asString();
 	//��ȡ����
 	key = "type";
-	type = dict->at(key);
+	type = dict->at(key).asString();
 	//��ȡimage��
 	key = "image";
-	imagePath = dict->at(key);
+	imagePath = dict->at(key).asString();
 	//��ȡrectX��rectY
 	key = "rectX";
-	int x1 = atoi(dict->at(key).c_str());
+	int x1 = dict->at(key).asInt();
 	key = "rectY";
-	int y1 = atoi(dict->at(key).c_str());
+	int y1 = dict->at(key).asInt();
 	rect = Rect(x1, y1, 32, 32);
 	//positionΪcocos2d-x���꣬tileCoordΪTileMap����
 	Vec2 position = Vec2(x, y);

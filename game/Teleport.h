@@ -9,7 +9,7 @@ using namespace cocos2d;
 class Teleport : public Ref
 {
 public:
-	Teleport(Map<std::string, std::string> *dict, int x, int y);
+	Teleport(ValueMap *dict, int x, int y);
 	~Teleport(void);
 	//���͵�����λ��
 	Point tileCoord;

@@ -7,10 +7,10 @@ GameMap::GameMap(void)
 
 GameMap::~GameMap(void)
 {
-	this->unscheduleAllSelectors();
-	CC_SAFE_RELEASE(enemyArray)
-	CC_SAFE_RELEASE(npcDict)
-	CC_SAFE_RELEASE(teleportDict)
+	//this->unscheduleAllSelectors();
+	//CC_SAFE_RELEASE(enemyArray);
+	//CC_SAFE_RELEASE(npcDict);
+	//CC_SAFE_RELEASE(teleportDict);
 }
 
 //��̬��������������GameMapʵ��
@@ -36,10 +36,10 @@ void GameMap::extraInit()
 	//��������ͼ������������
 	enableAnitiAliasForEachLayer();
 	//��ʼ���������
-	floorLayer = this->layerNamed("floor");
-	wallLayer = this->layerNamed("wall");
-	itemLayer = this->layerNamed("item");
-	doorLayer = this->layerNamed("door");
+	floorLayer = this->getLayer("floor");
+	wallLayer = this->getLayer("wall");
+	itemLayer = this->getLayer("item");
+	doorLayer = this->getLayer("door");
 
 	initEnemy();
 	initObject();
@@ -48,40 +48,40 @@ void GameMap::extraInit()
 void GameMap::initEnemy()
 {
 	//��ȡ�����
-	enemyLayer = this->layerNamed("enemy");
+	enemyLayer = this->getLayer("enemy");
 	Size s = enemyLayer->getLayerSize();
 	enemyArray = new Vector<Enemy*>();
 	int index;
 	//����enemy�㣬�����ڵĹ��ﱣ�浽������
 	for (int x = 0; x < s.width; x++) {
 		for (int y = 0; y < s.height; y++) {
-			int gid = enemyLayer->tileGIDAt(ccp(x, y));
+			int gid = enemyLayer->getTileGIDAt(Vec2(x, y));
 			if (gid != 0) {
 				Enemy* enemy = new Enemy();
 				//�����������
-				enemy->position = ccp(x, y);
+				enemy->position = Vec2(x, y);
 				//���������ʼ��ͼ��ID
 				enemy->startGID = gid;
 				//���ӹ����������
-				enemyArray->addObject(enemy);
+				enemyArray->pushBack(enemy);
 			}
 		}
 	}
 	//���ڸ��µ��˶���
-	schedule(schedule_selector(GameMap::updateEnemyAnimation), 0.2f);
+	schedule(CC_SCHEDULE_SELECTOR(GameMap::updateEnemyAnimation), 0.2f);
 }
 
 //���¹����ͼ��
 void GameMap::updateEnemyAnimation(float dt)
 {	
-	Vector<Enemy*>::CCMutableArrayIterator  iter;
+	Vector<Enemy*>::iterator  iter;
 	Enemy *enemy, *needRemove = NULL;
 	//�����������й�����������
 	for (iter = enemyArray->begin(); iter != enemyArray->end(); ++iter) {
 		enemy = *iter;
 		if (enemy != NULL) {
 			//��ȡ���ﵱǰ��ͼ��ID
-			int gid = enemyLayer->tileGIDAt(enemy->position);
+			int gid = enemyLayer->getTileGIDAt(enemy->position);
 			//������ﱻɾ���ˣ���Ҫ������enemyArray��Ҳɾ��
 			if (gid == 0)
 			{
@@ -99,7 +99,7 @@ void GameMap::updateEnemyAnimation(float dt)
 	}
 	//ɾ��������Ĺ���
 	if (needRemove != NULL) {
-		enemyArray->removeObject(needRemove, true);
+		enemyArray->eraseObject(needRemove, true);
 	}
 }
 //��ʼ�������
@@ -109,59 +109,67 @@ void GameMap::initObject()
 	teleportDict = new Map<int, Teleport*>();
 	npcDict = new Map<int, NPC*>();
 	//��ȡ�����
-	CCTMXObjectGroup* group = this->objectGroupNamed("object");
+	TMXObjectGroup* group = this->getObjectGroup("object");
 	//��ȡ������ڵ����ж���
-	CCMutableArray<CCStringToStringDictionary*> * objects = group->getObjects();
-	CCStringToStringDictionary* dict;
-	CCMutableArray<CCStringToStringDictionary*>::CCMutableArrayIterator it;
+	auto objects = group->getObjects();
+	//Vector<Map<std::string, std::string>*> objects = group->getObjects();
+	ValueMap dict;
+	//CCMutableArray<CCStringToStringDictionary*>::CCMutableArrayIterator it;
 	//�������ж���
-	for( it = objects->begin(); it != objects->end(); it++) 
+	for(auto it = objects.begin(); it != objects.end(); it++) 
 	{
-		dict = (*it);
-		if(!dict)
+		dict = (*it).asValueMap();
+		if(dict.empty())
 			break;
 		std::string key = "x";
 		//��ȡx����
-		int x = dict->objectForKey(key)->toInt();
+		int x = dict[key].asInt();
 		key = "y";
 		//��ȡy����
-		int y = dict->objectForKey(key)->toInt();
-		Point tileCoord = tileCoordForPosition(ccp(x, y));
+		int y = dict[key].asInt();
+		Point tileCoord = tileCoordForPosition(Vec2(x, y));
 		//����ΨһID
 		int index = tileCoord.x + tileCoord.y * this->getMapSize().width;
 		key = "type";
 		//��ȡ�������
-		CCString *type = dict->objectForKey(key);
+		auto type = dict[key];
 		//��������Ǵ�����
-		if (type->m_sString == "teleport"){
-			Teleport *teleport = new Teleport(dict, x, y);
-			teleportDict->setObject(teleport, index);
+		if (type.asString() == "teleport"){
+			Teleport *teleport = new Teleport(&dict, x, y);
+			//teleportDict->setObject(teleport, index);
+			//teleportDict[index] = teleport;
+			teleportDict->insert(index, teleport);
 		}
 		//���������NPC����
-		else if (type->m_sString == "npc"){
-			NPC *npc = new NPC(dict, x, y);
-			npcDict->setObject(npc, index);
+		else if (type.asString() == "npc"){
+			NPC *npc = new NPC(&dict, x, y);
+			npcDict->insert(index, npc);
+			//npcDict->setObject(npc, index);
 		}
 	}
 }
 
 void GameMap::enableAnitiAliasForEachLayer()
 {
-	CCArray * pChildrenArray = this->getChildren();
-	CCSpriteBatchNode* child = NULL;
-	CCObject* pObject = NULL;
+	auto pChildrenArray = this->getChildren();
+	SpriteBatchNode* child = NULL;
+	Node* pObject = NULL;
 	//����Tilemap������ͼ��
-	CCARRAY_FOREACH(pChildrenArray, pObject)
+	//CCARRAY_FOREACH(pChildrenArray, pObject)
+	for (auto it = pChildrenArray.begin(); it != pChildrenArray.end(); it++)
 	{
-		child = (CCSpriteBatchNode*)pObject;
-		if(!child)
+		//child = (CCSpriteBatchNode*)pObject;
+		child = static_cast<SpriteBatchNode*>(*it);
+		if(!child) {
 			break;
+		}
 		//��ͼ����������������
 		child->getTexture()->setAntiAliasTexParameters();
 	}
 }
 
 //��cocos2d-x����ת��ΪTilemap����
+// pixed坐标 =》 tiled坐标	
 Point GameMap::tileCoordForPosition(Point position)
 {
 	int x = position.x / this->getTileSize().width;
@@ -170,56 +178,57 @@ Point GameMap::tileCoordForPosition(Point position)
 }
 
 //��Tilemap����ת��Ϊcocos2d-x����
+// tiled 坐标 =》 pix 坐标
 Point GameMap::positionForTileCoord(Point tileCoord)
 {
-	Point pos =  ccp((tileCoord.x * this->getTileSize().width),
-		((this->getMapSize().height - tileCoord.y - 1) * this->getTileSize().height));
+	Point pos = Vec2((tileCoord.x * this->getTileSize().width),
+				((this->getMapSize().height - tileCoord.y - 1) * this->getTileSize().height));
 	return pos;
 }
 
 //���صذ��
-TMXLayer* GameMap::getFloorLayer()
+TMXLayer* GameMap::getFloorLayer() const
 {
 	return floorLayer;
 }
 //����ǽ�ڲ�
-TMXLayer* GameMap::getWallLayer()
+TMXLayer* GameMap::getWallLayer() const
 {
 	return wallLayer;
 }
 //���ع����
-TMXLayer* GameMap::getEnemyLayer()
+TMXLayer* GameMap::getEnemyLayer() const
 {
 	return enemyLayer;
 }
 //������Ʒ��
-TMXLayer* GameMap::getItemLayer()
+TMXLayer* GameMap::getItemLayer() const
 {
 	return itemLayer;
 }
 //�����Ų�
-TMXLayer* GameMap::getDoorLayer()
+TMXLayer* GameMap::getDoorLayer() const
 {
 	return doorLayer;
 }
 
 //���¹���ս��ʱ����ɫ״̬
-void GameMap::updateEnemyHitEffect(ccTime dt)
+void GameMap::updateEnemyHitEffect(float dt)
 {
 	//���´�����һ
 	fightCount++;
 	if (fightCount % 2 == 1) {
 		//���ù���sprite��ɫΪ��ɫ
-		fightingEnemy->setColor(ccWHITE);
+		fightingEnemy->setColor(Color3B::WHITE);
 	} else {
 		//���ù���sprite��ɫΪ��ɫ
-		fightingEnemy->setColor(ccRED);
+		fightingEnemy->setColor(Color3B::RED);
 	}
 
 	//�л�5�κ�ȡ����ʱ��
 	if (fightCount == 5)
 	{
-		unschedule(schedule_selector(GameMap::updateEnemyHitEffect));
+		unschedule(CC_SCHEDULE_SELECTOR(GameMap::updateEnemyHitEffect));
 	}
 }
 //��ʾ����������
@@ -228,11 +237,11 @@ void GameMap::showEnemyHitEffect(Point tileCoord)
 	//���´���
 	fightCount = 0;
 	//��ȡ�����Ӧ��CCSprite����
-	fightingEnemy = enemyLayer->tileAt(tileCoord);
+	fightingEnemy = enemyLayer->getTileAt(tileCoord);
 	if (fightingEnemy == NULL)
 		return;
 	//���ù���sprite��ɫΪ��ɫ
-	fightingEnemy->setColor(ccRED);
+	fightingEnemy->setColor(Color3B::RED);
 	//������ʱ�����´��״̬
-	this->schedule(schedule_selector(GameMap::updateEnemyHitEffect), 0.18f);
+	this->schedule(CC_SCHEDULE_SELECTOR(GameMap::updateEnemyHitEffect), 0.18f);
 }

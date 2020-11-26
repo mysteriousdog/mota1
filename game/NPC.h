@@ -10,7 +10,7 @@ class NPC : public Ref
 {
 public:
 	//���캯����Ҫ���ݴ��ݵ����Ա���ʼ����������
-	NPC(Map<std::string, std::string> *dict, int x, int y);
+	NPC(ValueMap *dict, int x, int y);
 	~NPC(void);
 	//������ʾnpc�ľ���
 	Sprite *npcSprite;
