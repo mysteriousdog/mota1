@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 
-#include "SimpleAudioEngine.h"
+//#include "SimpleAudioEngine.h"
 
 typedef enum {
 	kDown =  0,
