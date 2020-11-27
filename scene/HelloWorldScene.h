@@ -36,7 +36,7 @@ public:
     virtual void menuCloseCallback(Ref* pSender);
 
     // implement the "static node()" method manually
-    LAYER_NODE_FUNC(HelloWorld);
+    CREATE_FUNC(HelloWorld);
 
 	TMXTiledMap *map;
 

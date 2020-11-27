@@ -44,7 +44,7 @@ bool AnimationManager::initAnimationMap()
 Animation* AnimationManager::createHeroMovingAnimationByDirection(HeroDirection direction)
 {
 	//auto *heroTexture = TextureCache::sharedTextureCache()->addImage("hero.png");
-	auto *heroTexture = Director::getInstance()->getTextureCache()->addImage("hero.png");
+	auto heroTexture = Director::getInstance()->getTextureCache()->addImage("hero.png");
 	SpriteFrame *frame0, *frame1, *frame2, *frame3;
 	//�ڶ���������ʾ��ʾ�����x, y, width, height������direction��ȷ����ʾ��y����
 	frame0 = SpriteFrame::createWithTexture(heroTexture, Rect(32*0, 32*direction, 32, 32));
