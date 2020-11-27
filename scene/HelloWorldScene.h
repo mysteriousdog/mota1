@@ -5,19 +5,22 @@
 
 //#include "SimpleAudioEngine.h"
 
-typedef enum {
-	kDown =  0,
-	kLeft = 1,
-	kRight= 2,
-	kUp = 3,
-} HeroDirection;
+// typedef enum {
+// 	kDown =  0,
+// 	kLeft = 1,
+// 	kRight= 2,
+// 	kUp = 3,
+// } HeroDirection;
 
-typedef enum
-{
-	kNone = 1,//����ͨ��
-	kWall,//ǽ
-	kEnemy,//����
-} CollisionType;//��ײ����
+
+// typedef enum
+// {
+// 	kNone = 1,//����ͨ��
+// 	kWall,//ǽ
+// 	kEnemy,//����
+// } CollisionType;//��ײ����
+
+// 存在重复声明现象 此处先替换
 
 using namespace cocos2d;
 
