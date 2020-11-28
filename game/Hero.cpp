@@ -30,7 +30,7 @@ bool Hero::heroInit()
 {
 	//根据向下行走动画的第一帧创建精灵
 	//heroSprite = CCSprite::spriteWithSpriteFrame(sAnimationMgr->getAnimation(kDown)->getFrames()->getObjectAtIndex(0));
-	heroSprite = Sprite::createWithSpriteFrame(sAnimationMgr->getAnimation(kDown)->getFrames()->at(0));
+	heroSprite = Sprite::createWithSpriteFrame(sAnimationMgr->getAnimation(kDown)->getFrames().at(0)->getSpriteFrame());
 	//设置锚点
 	heroSprite->setAnchorPoint(Vec2(0, 0));
 	//将用于显示的heroSprite加到自己的节点下
@@ -95,7 +95,8 @@ void Hero::move(HeroDirection direction)
 void Hero::onMoveDone(Ref* pTarget, void* data)
 {
 	//将void*先转换为int，再从int转换到枚举类型
-	int direction = (int) data;
+	//int direction = reinterpret_cast<int>(data);
+	uintptr_t direction = reinterpret_cast<uintptr_t>(data);
 	setFaceDirection((HeroDirection)direction);
 	isHeroMoving = false;
 	sGlobal->gameLayer->setSceneScrollPosition(this->getPosition());

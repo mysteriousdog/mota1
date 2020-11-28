@@ -12,7 +12,7 @@ HelloWorld::~HelloWorld(void)
 	for (int i = 0; i < 4; i++)
 	{
 		//释放数组中元素
-		CC_SAFE_RELEASE(walkAnimation[i])
+		CC_SAFE_RELEASE(walkAnimation[i]);
 	}
 	//释放数组本身
 	CC_SAFE_DELETE_ARRAY(walkAnimation);
@@ -265,7 +265,7 @@ CollisionType HelloWorld::checkCollision(Point heroPosition)
 	if (heroPosition.x < 0 || tileCoord.x > map->getMapSize().width - 1 || tileCoord.y < 0 || tileCoord.y > map->getMapSize().height - 1)
 		return kWall;
 	//获取当前坐标位置的图块ID
-	int tileGid = map->getLayer("wall")->tileGIDAt(tileCoord);
+	int tileGid = map->getLayer("wall")->getTileGIDAt(tileCoord);
 	//如果图块ID不为0，表示有墙
 	if (tileGid) {
 		return kWall;

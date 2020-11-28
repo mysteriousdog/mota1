@@ -2,7 +2,7 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
-
+#include "MTGame.h"
 //#include "SimpleAudioEngine.h"
 
 // typedef enum {

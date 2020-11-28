@@ -26,6 +26,7 @@
 //#include "HelloWorldScene.h"
 //#include "SimpleAudioEngine.h"
 #include "MTGame.h"
+#include <iostream>
 
 // #define USE_AUDIO_ENGINE 1
 
@@ -109,11 +110,15 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0f / 60);
     //初始化动画管理器
+    std::cout<<"11aaaaaaaa"<<std::endl;
 	sAnimationMgr->initAnimationMap();
     //创建游戏主界面
     Scene *pScene = GameScene::playNewGame();
     //让director运行场景
     director->runWithScene(pScene);
+
+    auto sc = HelloWorld::createScene();
+    director->runWithScene(sc);
 
     return true;
 }

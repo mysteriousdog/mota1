@@ -8,7 +8,7 @@
 #include "layer/GameLayer.h"
 
 #include "scene/GameScene.h"
-#include "scene/HelloWorldScene.h"
+// #include "scene/HelloWorldScene.h"
 
 #include "game/Hero.h"
 #include "game/Enemy.h"

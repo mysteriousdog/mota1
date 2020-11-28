@@ -37,7 +37,7 @@ NPC::NPC(ValueMap *dict, int x, int y)
 NPC::~NPC(void)
 {
 	//�ͷ�CCString����
-	CC_SAFE_RELEASE(npcId)
-	CC_SAFE_RELEASE(imagePath)
-	CC_SAFE_RELEASE(type)
+	//CC_SAFE_RELEASE(npcId)
+	//C_SAFE_RELEASE(imagePath)
+	//CC_SAFE_RELEASE(type)
 }

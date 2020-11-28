@@ -49,7 +49,7 @@ protected:
 	//��ʼ������
 	bool heroInit();
 	//ս����ɺ�Ļص�����
-	void onFightDone(Node* pTarget);
+	void onFightDone(Ref* pTarget);
 	//��ײ��ⷽ��
 	CollisionType checkCollision(Point heroPosition);
 	//�ƶ���ɺ�Ļص�����
