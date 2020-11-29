@@ -32,7 +32,7 @@ Scene* GameScene::playNewGame()
 		//勇士出生位置
 		sGlobal->heroSpawnTileCoord = Vec2(1, 11);
 		scene = GameScene::create();
-		// CC_BREAK_IF(! scene);
+		CC_BREAK_IF(! scene);
 	} while (0);
 	return scene;
 }

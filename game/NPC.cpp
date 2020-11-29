@@ -22,7 +22,7 @@ NPC::NPC(ValueMap *dict, int x, int y)
 	tileCoord = sGlobal->gameMap->tileCoordForPosition(position);
 	//����������ʾnpc�ľ���
 	//npcSprite = Sprite::spriteWithFile(imagePath->m_sString.c_str(), rect);
-	npcSprite = Sprite::createWithSpriteFrameName(imagePath);
+	npcSprite = Sprite::create(imagePath, rect);
 	npcSprite->setAnchorPoint(Vec2(0, 0));
 	npcSprite->setPosition(position);
 	sGlobal->gameLayer->addChild(npcSprite, kZNPC);

@@ -45,6 +45,7 @@ Animation* AnimationManager::createHeroMovingAnimationByDirection(HeroDirection 
 {
 	//auto *heroTexture = TextureCache::sharedTextureCache()->addImage("hero.png");
 	auto heroTexture = Director::getInstance()->getTextureCache()->addImage("hero.png");
+	CCASSERT( (heroTexture), "heroTexture is null");
 	SpriteFrame *frame0, *frame1, *frame2, *frame3;
 	//�ڶ���������ʾ��ʾ�����x, y, width, height������direction��ȷ����ʾ��y����
 	frame0 = SpriteFrame::createWithTexture(heroTexture, Rect(32*0, 32*direction, 32, 32));
@@ -56,9 +57,10 @@ Animation* AnimationManager::createHeroMovingAnimationByDirection(HeroDirection 
 	animFrames->pushBack(frame1);
 	animFrames->pushBack(frame2);
 	animFrames->pushBack(frame3);
-	Animation* animation = new Animation();
+	Animation* animation;
 	//0.05f��ʾÿ֡������ļ��
-	animation->createWithSpriteFrames(*animFrames, 0.05f);
+	//animation->createWithSpriteFrames(*animFrames, 0.05f);
+	animation = Animation::createWithSpriteFrames(*animFrames, 0.05f);
 	//animFrames->release();
 
 	return animation;
@@ -89,10 +91,10 @@ Animation* AnimationManager::createFightAnimation()
 		}
 		animFrames->pushBack(frame);
 	}
-	Animation* animation = new Animation();
-	animation->createWithSpriteFrames(*animFrames, 0.1f);
+	// Animation* animation = new Animation();
+	// animation->createWithSpriteFrames(*animFrames, 0.1f);
 	//animFrames->release();
-	return animation;
+	return Animation::createWithSpriteFrames(*animFrames, 0.1f);
 }
 
 Animation* AnimationManager::createNPCAnimation()
@@ -111,10 +113,10 @@ Animation* AnimationManager::createNPCAnimation()
 	animFrames->pushBack(frame3);
 	Animation* animation = new Animation();
 	//0.05f��ʾÿ֡������ļ��
-	animation->createWithSpriteFrames(*animFrames, 0.2f);
+	//animation->createWithSpriteFrames(*animFrames, 0.2f);
 	//animFrames->release();
 
-	return animation;
+	return Animation::createWithSpriteFrames(*animFrames, 0.2f);
 }
 
 //��ȡָ������ģ��

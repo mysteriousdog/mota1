@@ -30,6 +30,9 @@ bool Hero::heroInit()
 {
 	//根据向下行走动画的第一帧创建精灵
 	//heroSprite = CCSprite::spriteWithSpriteFrame(sAnimationMgr->getAnimation(kDown)->getFrames()->getObjectAtIndex(0));
+	// char temp[20];
+	// sprintf(temp, "%d", kDown);
+	CCLOG("th size of kdown animation arrays is :%d\n", sAnimationMgr->getAnimation(kDown)->getFrames().size());
 	heroSprite = Sprite::createWithSpriteFrame(sAnimationMgr->getAnimation(kDown)->getFrames().at(0)->getSpriteFrame());
 	//设置锚点
 	heroSprite->setAnchorPoint(Vec2(0, 0));

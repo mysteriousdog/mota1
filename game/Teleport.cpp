@@ -22,7 +22,8 @@ Teleport::Teleport(ValueMap *dict, int x, int y)
 	//imagePath = dict->objectForKey(key);
 	imagePath = dict->at(key).asString();
 	//����������ʾTeleport�ľ���
-	teleportSprite = Sprite::createWithSpriteFrameName(imagePath); 
+	//teleportSprite = Sprite::createWithSpriteFrameName(imagePath);
+	teleportSprite = Sprite::create(imagePath);
 	//spriteWithFile(imagePath->m_sString.asInt());
 	teleportSprite->setAnchorPoint(Vec2(0, 0));
 	teleportSprite->setPosition(position);

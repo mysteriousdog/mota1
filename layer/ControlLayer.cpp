@@ -28,10 +28,10 @@ bool ControlLayer::init()
 	this->addChild(pMenu, 1);
 
 	//��������ť
-	MenuItem *down = MenuItemFont::create("down",CC_CALLBACK_1(ControlLayer::menuCallBackMove, this));
-	MenuItem *left = MenuItemFont::create("left", CC_CALLBACK_1(ControlLayer::menuCallBackMove, this) );
-	MenuItem *right = MenuItemFont::create("right", CC_CALLBACK_1(ControlLayer::menuCallBackMove, this) );
-	MenuItem *up = MenuItemFont::create("up", CC_CALLBACK_1(ControlLayer::menuCallBackMove, this) );
+	MenuItem *down = MenuItemFont::create("btn_down",CC_CALLBACK_1(ControlLayer::menuCallBackMove, this));
+	MenuItem *left = MenuItemFont::create("btn_left", CC_CALLBACK_1(ControlLayer::menuCallBackMove, this) );
+	MenuItem *right = MenuItemFont::create("btn_right", CC_CALLBACK_1(ControlLayer::menuCallBackMove, this) );
+	MenuItem *up = MenuItemFont::create("btn_up", CC_CALLBACK_1(ControlLayer::menuCallBackMove, this) );
 	Menu* menu = Menu::create(down, left, right, up, NULL);
 	//Ϊ�˷�����ң���ÿ��menuItem����tag
 	down->setTag(kDown);

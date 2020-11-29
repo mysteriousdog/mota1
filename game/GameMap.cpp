@@ -57,6 +57,7 @@ void GameMap::initEnemy()
 		for (int y = 0; y < s.height; y++) {
 			int gid = enemyLayer->getTileGIDAt(Vec2(x, y));
 			if (gid != 0) {
+				CCLOG("enemy cood => x,y: %d,%d \n",x,y);
 				Enemy* enemy = new Enemy();
 				//�����������
 				enemy->position = Vec2(x, y);
@@ -128,8 +129,10 @@ void GameMap::initObject()
 		//��ȡy����
 		int y = dict[key].asInt();
 		Point tileCoord = tileCoordForPosition(Vec2(x, y));
+		
 		//����ΨһID
 		int index = tileCoord.x + tileCoord.y * this->getMapSize().width;
+		CCLOG("point of object is x,y: %f, %f, index is : %d\n", tileCoord.x, tileCoord.y, index);
 		key = "type";
 		//��ȡ�������
 		auto type = dict[key];
@@ -139,9 +142,7 @@ void GameMap::initObject()
 			//teleportDict->setObject(teleport, index);
 			//teleportDict[index] = teleport;
 			teleportDict->insert(index, teleport);
-		}
-		//���������NPC����
-		else if (type.asString() == "npc"){
+		} else if (type.asString() == "npc"){
 			NPC *npc = new NPC(&dict, x, y);
 			npcDict->insert(index, npc);
 			//npcDict->setObject(npc, index);
