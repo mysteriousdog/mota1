@@ -20,6 +20,8 @@ public:
 	//ʹ��CCLayer��׼�Ĵ���ʵ���ķ�ʽ������node����
 	//LAYER_NODE_FUNC(ControlLayer);
 	CREATE_FUNC(ControlLayer);
+	void OnKeyPressed(EventKeyboard::KeyCode keyCode , Event* event);
+    void OnKeyReleased(EventKeyboard::KeyCode keyCode , Event* event);
 };
 
 #endif

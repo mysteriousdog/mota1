@@ -27,20 +27,28 @@ bool ControlLayer::init()
 	pMenu->setPosition(Vec2());
 	this->addChild(pMenu, 1);
 
-	//��������ť
-	MenuItem *down = MenuItemFont::create("btn_down",CC_CALLBACK_1(ControlLayer::menuCallBackMove, this));
-	MenuItem *left = MenuItemFont::create("btn_left", CC_CALLBACK_1(ControlLayer::menuCallBackMove, this) );
-	MenuItem *right = MenuItemFont::create("btn_right", CC_CALLBACK_1(ControlLayer::menuCallBackMove, this) );
-	MenuItem *up = MenuItemFont::create("btn_up", CC_CALLBACK_1(ControlLayer::menuCallBackMove, this) );
-	Menu* menu = Menu::create(down, left, right, up, NULL);
-	//Ϊ�˷�����ң���ÿ��menuItem����tag
-	down->setTag(kDown);
-	left->setTag(kLeft);
-	right->setTag(kRight);
-	up->setTag(kUp);
-	//�˵�����50ˮƽ����
-	menu->alignItemsHorizontallyWithPadding(50);
-	this->addChild(menu);
+	// //��������ť
+	// MenuItem *down = MenuItemFont::create("btn_down",CC_CALLBACK_1(ControlLayer::menuCallBackMove, this));
+	// MenuItem *left = MenuItemFont::create("btn_left", CC_CALLBACK_1(ControlLayer::menuCallBackMove, this) );
+	// MenuItem *right = MenuItemFont::create("btn_right", CC_CALLBACK_1(ControlLayer::menuCallBackMove, this) );
+	// MenuItem *up = MenuItemFont::create("btn_up", CC_CALLBACK_1(ControlLayer::menuCallBackMove, this) );
+	// Menu* menu = Menu::create(down, left, right, up, NULL);
+	// //Ϊ�˷�����ң���ÿ��menuItem����tag
+	// down->setTag(kDown);
+	// left->setTag(kLeft);
+	// right->setTag(kRight);
+	// up->setTag(kUp);
+	// //�˵�����50ˮƽ����
+	// menu->alignItemsHorizontallyWithPadding(50);
+	// this->addChild(menu);
+
+	//键盘事件监听
+    auto keyBoardListener = EventListenerKeyboard::create();
+    keyBoardListener->onKeyPressed = CC_CALLBACK_2(ControlLayer::OnKeyPressed, this);
+    keyBoardListener->onKeyReleased = CC_CALLBACK_2(ControlLayer::OnKeyReleased, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority(keyBoardListener, this);
+    this->scheduleUpdate();
+
 	return true;
 }
 
@@ -56,4 +64,37 @@ void ControlLayer::menuCallBackMove(Ref* pSender)
 	int targetDirection = node->getTag();
 	CCLOG("the direction get from click menucallbackis %d\n", targetDirection);
 	sGlobal->hero->move((HeroDirection) targetDirection);
+}
+void ControlLayer::OnKeyPressed(EventKeyboard::KeyCode keyCode , Event* event){
+    
+    Vec2 location;
+    if (keyCode == EventKeyboard::KeyCode::KEY_A) {
+        CCLOG("left!!! \n");
+		sGlobal->hero->move((HeroDirection)(1));
+    } else if (keyCode == EventKeyboard::KeyCode::KEY_D) {
+        CCLOG("right!!! \n");
+		sGlobal->hero->move((HeroDirection)(2));
+    } else if (keyCode == EventKeyboard::KeyCode::KEY_W) {
+        CCLOG("forword!!! \n");
+		sGlobal->hero->move((HeroDirection)(3));
+    } else if (keyCode == EventKeyboard::KeyCode::KEY_S) {
+        CCLOG("back!!! \n");
+		sGlobal->hero->move((HeroDirection)(0));
+    } else if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) {
+        CCLOG("escape!!! \n");
+    } else {
+        return;
+    }
+
+}
+
+void ControlLayer::OnKeyReleased(EventKeyboard::KeyCode keyCode , Event* event){
+    //CCLOG("Released key %d\n",keyCode);
+    // if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) {
+    //     if (pause == 0) {
+    //         ShowShop();
+    //     } else if (pause == 1) {
+    //         BackGame(NULL);
+    //     }
+    // }
 }
