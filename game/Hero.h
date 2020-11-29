@@ -53,7 +53,8 @@ protected:
 	//��ײ��ⷽ��
 	CollisionType checkCollision(Point heroPosition);
 	//�ƶ���ɺ�Ļص�����
-	void onMoveDone(Ref* pTarget, void* data);
+	void onMoveDone(Node* pTarget, void* data);
+	// void onMoveDone(Node* pTarget);
 	//���¿��Ŷ���
 	void updateOpenDoorAnimation(float dt);
 };

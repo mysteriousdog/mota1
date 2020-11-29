@@ -54,5 +54,6 @@ void ControlLayer::menuCallBackMove(Ref* pSender)
     Node *node = (Node *) pSender;
 	//��ť��tag������Ҫ���ߵķ���
 	int targetDirection = node->getTag();
+	CCLOG("the direction get from click menucallbackis %d\n", targetDirection);
 	sGlobal->hero->move((HeroDirection) targetDirection);
 }

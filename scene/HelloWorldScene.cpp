@@ -196,8 +196,9 @@ void HelloWorld::onWalkDone(Ref* pTarget, void* data)
 	int direction = (int) data;
 	setFaceDirection((HeroDirection)direction);
 	isHeroWalking = false;
+	CCLOG("what!!!!!!\n");
 	//heroSprite->setPosition(targetPosition);
-	setSceneScrollPosition(heroSprite->getPosition());
+	// setSceneScrollPosition(heroSprite->getPosition());
 }
 
 //从cocos2d-x坐标转换为Tilemap坐标
@@ -243,7 +244,7 @@ void HelloWorld::setSceneScrollPosition(Point position)
 	//计算勇士实际位置和重点位置的距离
 	Point scrollPosition = screenCenter - heroPosition;
 	//将场景移动到相应位置
-	setPosition(scrollPosition);
+	//setPosition(scrollPosition);
 	CCLOG("scene position: %f,%f", scrollPosition.x, scrollPosition.y);
 }
 

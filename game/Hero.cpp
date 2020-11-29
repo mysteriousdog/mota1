@@ -77,6 +77,7 @@ void Hero::move(HeroDirection direction)
 	targetPosition = this->getPosition() + moveByPosition;
 	//调用checkCollision检测碰撞类型，如果是墙壁、怪物、门，则只需要设置勇士的朝向
 	CollisionType collisionType = checkCollision(targetPosition);
+	CCLOG("the collisiontype is %d\n", collisionType);
 	if (collisionType == kWall || collisionType == kEnemy || collisionType == kDoor || collisionType == kNPC)
 	{
 		setFaceDirection((HeroDirection)direction);
@@ -84,22 +85,29 @@ void Hero::move(HeroDirection direction)
 	}
 	//heroSprite仅播放行走动画
 	heroSprite->runAction(sAnimationMgr->createAnimate(direction));
+	CCLOG("hero run action done, the direction is: %d\n", direction);
 	//主体进行位移，结束时调用onMoveDone方法
 	auto action = Sequence::create(
 		MoveBy::create(0.20f, moveByPosition),
 		//把方向信息传递给onMoveDone方法
-		CC_CALLBACK_2(Hero::onMoveDone, (void*)direction, this),
-		//CCCallFuncND::actionWithTarget(this, callfuncND_selector(Hero::onMoveDone), (void*)direction),
+		//CC_CALLBACK_2(Hero::onMoveDone, this, (void*)direction),
+		//CC_CALLBACK_1(Hero::onMoveDone, this),
+		//CallFunc::create(this, callfuncND_selector(Hero::onMoveDone), (void*)direction),
+		//CallFunc::create(CC_CALLFUNC_SELECTOR(Hero::onMoveDone)),
+		CallFuncN::create(CC_CALLBACK_1(Hero::onMoveDone, this, (void*)direction)),
 		NULL);
+	//auto action = MoveBy::create(0.20f, moveByPosition);
 	this->runAction(action);
 	isHeroMoving = true;
 }
 
-void Hero::onMoveDone(Ref* pTarget, void* data)
+void Hero::onMoveDone(Node* pTarget, void* data)
 {
 	//将void*先转换为int，再从int转换到枚举类型
 	//int direction = reinterpret_cast<int>(data);
+	CCLOG("onMoveDown end!\n");
 	uintptr_t direction = reinterpret_cast<uintptr_t>(data);
+	CCLOG("the trans direction is %l\n", direction);
 	setFaceDirection((HeroDirection)direction);
 	isHeroMoving = false;
 	sGlobal->gameLayer->setSceneScrollPosition(this->getPosition());
@@ -108,6 +116,7 @@ void Hero::onMoveDone(Ref* pTarget, void* data)
 void Hero::setFaceDirection(HeroDirection direction)
 {
 	heroSprite->setTextureRect(Rect(0,32*direction,32,32));
+	CCLOG("set face direction done! now face direction is: %d\n", direction);
 }
 
 //判断碰撞类型

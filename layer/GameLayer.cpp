@@ -48,15 +48,19 @@ void GameLayer::update(float dt)
 //传入勇士当前位置信息，将场景移动到相应位置
 void GameLayer::setSceneScrollPosition(Point position)
 {
+	CCLOG("position = > x,y: %f, %f\n", position.x, position.y);
 	//获取屏幕尺寸
 	//Size screenSize = CCDirector::sharedDirector()->getWinSize();
 	auto screenSize = Director::getInstance()->getWinSize();
+	CCLOG("screenSize = > x,y: %f, %f\n", screenSize.width, screenSize.height);
 	//计算Tilemap的宽高，单位是像素
 	auto mapSizeInPixel = Size(map->getMapSize().width * map->getTileSize().width, 
 		map->getMapSize().height * map->getTileSize().height);
+	CCLOG("mapSize = > x,y: %f, %f\n", mapSizeInPixel.width, mapSizeInPixel.height);
 	//取勇士当前x坐标和屏幕中点x的最大值，如果勇士的x值较大，则会滚动
 	float x = MAX(position.x, screenSize.width / 2.0f);
 	float y = MAX(position.y, screenSize.height / 2.0f);
+	CCLOG("max x and y  = > x,y: %f, %f\n", x, y);
 	//地图总宽度大于屏幕宽度的时候才有可能滚动
 	if (mapSizeInPixel.width  > screenSize.width)
 	{
@@ -75,7 +79,10 @@ void GameLayer::setSceneScrollPosition(Point position)
 	Point scrollPosition = screenCenter - heroPosition;
 	//将场景移动到相应位置
 	this->setPosition(scrollPosition);
-	CCLOG("%f,%f", scrollPosition.x, scrollPosition.y);
+	CCLOG("print the screen move position!\n");
+	CCLOG("%f,%f\n", screenCenter.x, screenCenter.y);
+	CCLOG("%f,%f\n", heroPosition.x, heroPosition.y);
+	CCLOG("%f,%f\n", scrollPosition.x, scrollPosition.y);
 }
 
 //显示提示信息
