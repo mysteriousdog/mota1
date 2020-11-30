@@ -218,6 +218,7 @@ void GameMap::updateEnemyHitEffect(float dt)
 {
 	//���´�����һ
 	fightCount++;
+	CCLOG("fightCount is %d\n", fightCount);
 	if (fightCount % 2 == 1) {
 		//���ù���sprite��ɫΪ��ɫ
 		fightingEnemy->setColor(Color3B::WHITE);
@@ -229,6 +230,7 @@ void GameMap::updateEnemyHitEffect(float dt)
 	//�л�5�κ�ȡ����ʱ��
 	if (fightCount == 5)
 	{
+		CCLOG("stop shining the enemy!\n");
 		unschedule(CC_SCHEDULE_SELECTOR(GameMap::updateEnemyHitEffect));
 	}
 }
@@ -244,5 +246,6 @@ void GameMap::showEnemyHitEffect(Point tileCoord)
 	//���ù���sprite��ɫΪ��ɫ
 	fightingEnemy->setColor(Color3B::RED);
 	//������ʱ�����´��״̬
+	CCLOG("start to shining the enemy\n");
 	this->schedule(CC_SCHEDULE_SELECTOR(GameMap::updateEnemyHitEffect), 0.18f);
 }

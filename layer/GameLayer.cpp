@@ -89,7 +89,8 @@ void GameLayer::setSceneScrollPosition(Point position)
 void GameLayer::showTip(const char *tip, Point startPosition)
 {
 	//新建一个文本标签
-	auto tipLabel = Label::createWithTTF(tip, "fonts/Marker Felt.ttf", 24);
+	//auto tipLabel = Label::createWithTTF(tip, "fonts/arial.ttf", 20);
+	auto tipLabel = Label::createWithSystemFont(tip, "Arial", 20);
 	tipLabel->setPosition(startPosition + Vec2(16, 16));
 	this->addChild(tipLabel, kZTip,kZTip);
 	//定义动画效果
@@ -97,7 +98,8 @@ void GameLayer::showTip(const char *tip, Point startPosition)
 		MoveBy::create(0.5f, Vec2(0, 32)),
 		DelayTime::create(0.5f),
 		FadeOut::create(0.2f),
-		CC_CALLBACK_1(GameLayer::onShowTipDone, this),
+		//CC_CALLBACK_1(GameLayer::onShowTipDone, this),
+		CallFuncN::create(CC_CALLBACK_1(GameLayer::onShowTipDone, this)),
 		//CCCallFuncN::actionWithTarget(this, callfuncN_selector(GameLayer::onShowTipDone)),
 		NULL);
 	tipLabel->runAction(action);
@@ -107,5 +109,7 @@ void GameLayer::showTip(const char *tip, Point startPosition)
 void GameLayer::onShowTipDone(Ref* pSender)
 {
 	//删掉文本标签
+	CCLOG("remove from parent\n");
+	//this->getChildByTag(kZTip)->setVisible(false);
 	this->getChildByTag(kZTip)->removeFromParentAndCleanup(true);
 }
