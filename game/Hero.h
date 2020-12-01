@@ -5,6 +5,8 @@
 
 using namespace cocos2d;
 
+#define STAY_GROUND -1
+
 class Teleport;
 
 //��ʿ��̳���CCNode
@@ -23,6 +25,10 @@ public:
 	void fight();
 	//��ʶ��ʿ�Ƿ����ƶ�״̬
 	bool isHeroMoving;
+	bool isTalking;
+	// 移动方向 用于update中进行hero移动
+	int heroMovingSpeed;
+	int movingDirection;
 	//��ʶ��ʿ�Ƿ���ս��״̬
 	bool isHeroFighting;
 	//��ʶ��ʿ�Ƿ��ڿ���״̬

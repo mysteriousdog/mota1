@@ -112,4 +112,8 @@ void GameLayer::onShowTipDone(Ref* pSender)
 	CCLOG("remove from parent\n");
 	//this->getChildByTag(kZTip)->setVisible(false);
 	this->getChildByTag(kZTip)->removeFromParentAndCleanup(true);
+	if (sGlobal->hero->isTalking) {
+		CCLOG("now the talk is over!!\n");
+		sGlobal->hero->isTalking = false;
+	}
 }

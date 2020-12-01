@@ -12,6 +12,8 @@ public:
 	~ControlLayer(void);
 	//node��������ô˺���
 	virtual bool init();
+	// 每隔tti事件 update事件
+	virtual void update(float delta);
 	//����ť����¼��Ļص�
 	void menuCallBackMove(Ref* pSender);
 	//�رհ�ť����¼��Ļص�

@@ -47,6 +47,9 @@ bool Hero::heroInit()
 	isHeroMoving = false;
 	isHeroFighting = false;
 	isDoorOpening = false;
+	movingDirection = STAY_GROUND;
+	isTalking = false;
+	heroMovingSpeed = 32;
 	return true;
 }
 
@@ -54,23 +57,22 @@ void Hero::move(HeroDirection direction)
 {
 	if (isHeroMoving)
 		return;
-
 	//移动的距离
 	Point moveByPosition;
 	//根据方向计算移动的距离
 	switch (direction)
 	{
 	case kDown:
-		moveByPosition = Vec2(0, -32);
+		moveByPosition = Vec2(0, -1 * heroMovingSpeed);
 		break;
 	case kLeft:
-		moveByPosition = Vec2(-32, 0);
+		moveByPosition = Vec2(-1 * heroMovingSpeed, 0);
 		break;
 	case kRight:
-		moveByPosition = Vec2(32, 0);
+		moveByPosition = Vec2(heroMovingSpeed, 0);
 		break;
 	case kUp:
-		moveByPosition = Vec2(0, 32);
+		moveByPosition = Vec2(0, heroMovingSpeed);
 		break;
 	}
 	//计算目标坐标，用当前勇士坐标加上移动距离
@@ -249,6 +251,7 @@ void Hero::updateOpenDoorAnimation(float dt)
 //与NPC交互
 void Hero::actWithNPC()
 {
+	isTalking = true;
 	sGlobal->gameLayer->showTip("talking with npc", getPosition());
 }
 //传送点逻辑

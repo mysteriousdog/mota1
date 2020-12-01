@@ -68,18 +68,25 @@ void ControlLayer::menuCallBackMove(Ref* pSender)
 void ControlLayer::OnKeyPressed(EventKeyboard::KeyCode keyCode , Event* event){
     
     Vec2 location;
+	if (sGlobal->hero->isHeroMoving || sGlobal->hero->isTalking) {
+		return;
+	}
     if (keyCode == EventKeyboard::KeyCode::KEY_A) {
         CCLOG("left!!! \n");
-		sGlobal->hero->move((HeroDirection)(1));
+		sGlobal->hero->movingDirection = kLeft;
+		//sGlobal->hero->move((HeroDirection)(kLeft));
     } else if (keyCode == EventKeyboard::KeyCode::KEY_D) {
         CCLOG("right!!! \n");
-		sGlobal->hero->move((HeroDirection)(2));
+		sGlobal->hero->movingDirection = kRight;
+		//sGlobal->hero->move((HeroDirection)(kRight));
     } else if (keyCode == EventKeyboard::KeyCode::KEY_W) {
         CCLOG("forword!!! \n");
-		sGlobal->hero->move((HeroDirection)(3));
+		//sGlobal->hero->move((HeroDirection)(kUp));
+		sGlobal->hero->movingDirection = kUp;
     } else if (keyCode == EventKeyboard::KeyCode::KEY_S) {
         CCLOG("back!!! \n");
-		sGlobal->hero->move((HeroDirection)(0));
+		//sGlobal->hero->move((HeroDirection)(kDown));
+		sGlobal->hero->movingDirection = kDown;
     } else if (keyCode == EventKeyboard::KeyCode::KEY_ESCAPE) {
         CCLOG("escape!!! \n");
     } else {
@@ -97,4 +104,14 @@ void ControlLayer::OnKeyReleased(EventKeyboard::KeyCode keyCode , Event* event){
     //         BackGame(NULL);
     //     }
     // }
+	sGlobal->hero->movingDirection = STAY_GROUND;
+}
+
+void ControlLayer::update(float delta){
+	int direction = sGlobal->hero->movingDirection;
+	if (direction == STAY_GROUND) {
+		return;
+	} else if(!sGlobal->hero->isHeroMoving && !sGlobal->hero->isTalking) {
+		sGlobal->hero->move((HeroDirection)(direction));
+	}
 }
