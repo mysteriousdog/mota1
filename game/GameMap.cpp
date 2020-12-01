@@ -232,6 +232,9 @@ void GameMap::updateEnemyHitEffect(float dt)
 	{
 		CCLOG("stop shining the enemy!\n");
 		unschedule(CC_SCHEDULE_SELECTOR(GameMap::updateEnemyHitEffect));
+		//删除怪物对应的图块，表示已经被消灭
+		sGlobal->gameMap->getEnemyLayer()->removeTileAt(sGlobal->hero->targetTileCoord);
+		sGlobal->hero->isHeroFighting = false;
 	}
 }
 //��ʾ����������

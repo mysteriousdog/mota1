@@ -92,7 +92,7 @@ void GameLayer::showTip(const char *tip, Point startPosition)
 	//auto tipLabel = Label::createWithTTF(tip, "fonts/arial.ttf", 20);
 	auto tipLabel = Label::createWithSystemFont(tip, "Arial", 20);
 	tipLabel->setPosition(startPosition + Vec2(16, 16));
-	this->addChild(tipLabel, kZTip,kZTip);
+	this->addChild(tipLabel, kZTip, kZTip);
 	//定义动画效果
 	auto action = Sequence::create(
 		MoveBy::create(0.5f, Vec2(0, 32)),

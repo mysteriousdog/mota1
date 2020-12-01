@@ -35,11 +35,12 @@ public:
 	void actWithNPC();
 	//����
 	void doTeleport(Teleport *teleport);
+	//��ʱ����Ŀ���Tilemap����
+	Point targetTileCoord;
 protected:
 	//������ʾ��ʿ����ľ���
 	Sprite *heroSprite;
-	//��ʱ����Ŀ���Tilemap����
-	Point targetTileCoord;
+	
 	//��ʱ����Ŀ���cocos2d-x����
 	Point targetPosition;
 	//��ʱ��������ʼ��ͼ��ID

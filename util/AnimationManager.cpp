@@ -75,22 +75,35 @@ Animation* AnimationManager::createFightAnimation()
 		4,6,8,10,13,15,17,19,20,22
 	};
 	Vector<SpriteFrame*>* animFrames = new Vector<SpriteFrame*>();
-	auto *texture = Director::getInstance()->getTextureCache()->addImage("sword.png");
+	auto texture = Director::getInstance()->getTextureCache()->addImage("sword.png");
 	SpriteFrame *frame;
 	int x, y;
-	for (int i = 0; i < 10; i++) 
-	{
-		//����ÿ֡�����������е�ƫ����
-		x = fightAnim[i] % 5 - 1;
-		y = fightAnim[i] / 5;
-		frame = SpriteFrame::createWithTexture(texture, Rect(192*x, 192*y, 192, 192));
-		//��17��19֡��y��������-8��ƫ��
-		if (fightAnim[i] == 17 || fightAnim[i] == 19)
-		{
-			frame->setOffsetInPixels( Vec2(0, -8) );
-		}
-		animFrames->pushBack(frame);
-	}
+	// for (int i = 0; i < 10; i++) 
+	// {
+	// 	//����ÿ֡�����������е�ƫ����
+	// 	x = fightAnim[i] % 5 - 1;
+	// 	y = fightAnim[i] / 5;
+	// 	CCLOG("the location is x,y: %d, %d\n", x, y);
+	// 	if (x < 0 || y < 0) {
+	// 		continue;
+	// 	}
+	// 	frame = SpriteFrame::createWithTexture(texture, Rect(192*x, 192*y, 192, 192));
+	// 	//��17��19֡��y��������-8��ƫ��
+	// 	if (fightAnim[i] == 17 || fightAnim[i] == 19)
+	// 	{
+	// 		frame->setOffsetInPixels( Vec2(0, -8) );
+	// 	}
+	// 	animFrames->pushBack(frame);
+	// }
+	x = 3;
+	y = 0;
+	animFrames->pushBack(SpriteFrame::createWithTexture(texture, Rect(192*x, 192*y, 192, 192)));
+	x = 0;
+	y = 1;
+	animFrames->pushBack(SpriteFrame::createWithTexture(texture, Rect(192*x, 192*y, 192, 192)));
+	x = 2;
+	y = 1;
+	animFrames->pushBack(SpriteFrame::createWithTexture(texture, Rect(192*x, 192*y, 192, 192)));
 	// Animation* animation = new Animation();
 	// animation->createWithSpriteFrames(*animFrames, 0.1f);
 	//animFrames->release();

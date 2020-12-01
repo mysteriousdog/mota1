@@ -190,19 +190,19 @@ void Hero::fight()
 	sprintf(temp, "lost hp: -%d", 100);
 	sGlobal->gameLayer->showTip(temp, getPosition());
 	//将用于显示战斗动画的精灵设置为可见
-	fightSprite->setVisible(true);
-	//计算显示战斗动画的位置为勇士和怪物的中间点
-	auto pos = Vec2((targetPosition.x - getPosition().x) / 2 + 16, (targetPosition.y - getPosition().y) / 2 + 16);
-	CCLOG("the location of hero and enemy is : %d, %d\n", pos.x, pos.y);
-	fightSprite->setPosition(pos);
-	//创建战斗动画
-	auto action = Sequence::create(
-		sAnimationMgr->createAnimate(aFight),
-		//CC_CALLBACK_1(Hero::onFightDone, this),
-		CallFuncN::create(CC_CALLBACK_1(Hero::onFightDone, this)),
-		//CCCallFuncN::actionWithTarget(this, callfuncN_selector(Hero::onFightDone)),
-		NULL);
-	fightSprite->runAction(action);
+	// fightSprite->setVisible(true);
+	// //计算显示战斗动画的位置为勇士和怪物的中间点
+	// auto pos = Vec2((targetPosition.x - getPosition().x) / 2 + 16, (targetPosition.y - getPosition().y) / 2 + 16);
+	// CCLOG("the location of hero and enemy is : %d, %d\n", pos.x, pos.y);
+	// fightSprite->setPosition(pos);
+	// //创建战斗动画
+	// auto action = Sequence::create(
+	// 	sAnimationMgr->createAnimate(aFight),
+	// 	//CC_CALLBACK_1(Hero::onFightDone, this),
+	// 	CallFuncN::create(CC_CALLBACK_1(Hero::onFightDone, this)),
+	// 	//CCCallFuncN::actionWithTarget(this, callfuncN_selector(Hero::onFightDone)),
+	// 	NULL);
+	// fightSprite->runAction(action);
 }
 //战斗结束的回调
 void Hero::onFightDone(Ref* pSender)
