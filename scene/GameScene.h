@@ -19,8 +19,8 @@ public:
 	CREATE_FUNC(GameScene);
 	//
 	void switchMap();
-	void resetGameLayer();
-	void removeFadeLayer();
+	void resetGameLayer(Ref* Spender);
+	void removeFadeLayer(Ref* Spender);
 };
 
 #endif

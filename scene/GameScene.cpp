@@ -47,13 +47,14 @@ void GameScene::switchMap()
 	//执行淡入动画，结束后调用resetGameLayer方法
 	auto action = Sequence::create(
 		FadeIn::create(0.5f),
-		CC_CALLBACK_1(GameScene::resetGameLayer, this),
+		//CC_CALLBACK_1(GameScene::resetGameLayer, this),
+		CallFuncN::create(CC_CALLBACK_1(GameScene::resetGameLayer, this)),
 		//CCCallFunc::actionWithTarget(this, callfunc_selector(GameScene::resetGameLayer)),
 		NULL);
 	fadeLayer->runAction(action);
 }
 //切换游戏地图
-void GameScene::resetGameLayer()
+void GameScene::resetGameLayer(Ref* Spender)
 {
 	//删除老的GameLayer
 	this->removeChildByTag(kGameLayer, true);
@@ -63,13 +64,14 @@ void GameScene::resetGameLayer()
 	//遮罩层执行淡出效果，结束后，调用removeFadeLayer方法删除遮罩层
 	auto action = Sequence::create(
 		FadeOut::create(0.5f),
-		CC_CALLBACK_1(GameScene::removeFadeLayer, this),
+		//CC_CALLBACK_1(GameScene::removeFadeLayer, this),
+		CallFuncN::create(CC_CALLBACK_1(GameScene::removeFadeLayer, this)),
 		//CCCallFunc::actionWithTarget(this, callfunc_selector(GameScene::removeFadeLayer)),
 		NULL);
 	this->getChildByTag(kFadeLayer)->runAction(action);
 }
 
-void GameScene::removeFadeLayer()
+void GameScene::removeFadeLayer(Ref* Spender)
 {
 	this->removeChildByTag(kFadeLayer, true);
 }
