@@ -28,9 +28,9 @@ Scene* GameScene::playNewGame()
 	do 
     {
 		//新游戏，当前地图层数为0
-		sGlobal->currentLevel = 0;
+		sGlobal->currentLevel = 2;
 		//勇士出生位置
-		sGlobal->heroSpawnTileCoord = Vec2(1, 11);
+		sGlobal->heroSpawnTileCoord = Vec2(6, 12);
 		scene = GameScene::create();
 		CC_BREAK_IF(! scene);
 	} while (0);
