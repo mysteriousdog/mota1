@@ -28,14 +28,17 @@
 #include "MTGame.h"
 #include <iostream>
 
-// #define USE_AUDIO_ENGINE 1
+#define USE_AUDIO_ENGINE 1
 
-#if USE_AUDIO_ENGINE
-#include "audio/include/AudioEngine.h"
-using namespace cocos2d::experimental;
-#endif
 
 USING_NS_CC;
+#if USE_AUDIO_ENGINE
+#include "audio/include/AudioEngine.h"
+//using namespace experimental;
+#endif
+
+
+//using namespace CocosDenshion;
 
 static cocos2d::Size designResolutionSize = cocos2d::Size(320, 480);
 static cocos2d::Size smallResolutionSize = cocos2d::Size(480, 320);

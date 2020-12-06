@@ -128,6 +128,7 @@ void GameMap::initObject()
 		key = "y";
 		//��ȡy����
 		int y = dict[key].asInt();
+		CCLOG("x and y pixel: %d,%d\n",x,y);
 		Point tileCoord = tileCoordForPosition(Vec2(x, y));
 		
 		//����ΨһID

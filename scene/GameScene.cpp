@@ -19,6 +19,7 @@ bool GameScene::init()
 	ControlLayer *controlLayer = ControlLayer::create();
 	//将ControlLayer实例添加到场景中
 	this->addChild(controlLayer, kControlLayer, kControlLayer);
+	int audioID = cocos2d::AudioEngine::play2d("musics/bgm.m4a", true);
 	return true;
 }
 
