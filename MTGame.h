@@ -1,6 +1,7 @@
 #ifndef __MTGAME_H__
 #define __MTGAME_H__
 
+#include "Def.h"
 #include "audio/include/AudioEngine.h"
 
 #include "cocos2d.h"
@@ -21,5 +22,6 @@
 #include "util/Singleton.h"
 #include "util/AnimationManager.h"
 #include "util/Global.h"
+#include "util/Music.h"
 
 #endif
