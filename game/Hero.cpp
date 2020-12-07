@@ -251,6 +251,10 @@ void Hero::updateOpenDoorAnimation(float dt)
 //与NPC交互
 void Hero::actWithNPC()
 {
+	int audioId;
+	if (sMusic->getAudioId("bgm", audioId)) {
+		AudioEngine::stop(audioId);
+	}
 	isTalking = true;
 	sGlobal->gameLayer->showTip("talking with npc", getPosition());
 }

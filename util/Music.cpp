@@ -1,5 +1,6 @@
 #include "Music.h"
 //#include <utility>
+DECLARE_SINGLETON_MEMBER(Music);
 
 Music::Music()
 {

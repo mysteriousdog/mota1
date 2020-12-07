@@ -2,7 +2,7 @@
 #define __MUSIC_H__
 
 #include "MTGame.h"
-
+#include <jsoncpp/json/json.h>
 USING_NS_CC;
 
 
