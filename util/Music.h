@@ -14,6 +14,7 @@ public:
     bool getAudioId(std::string audioStr, OUT int& audioId);
     bool SetMusicMap(std::string audioStr, int audioId);
 private:
+    
     std::map<std::string, int> *musicMap;
 };
 

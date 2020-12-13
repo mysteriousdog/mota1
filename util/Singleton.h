@@ -7,7 +7,7 @@ class Singleton
 {
 public:
 	//获取类的唯一实例
-	static inline T* instance();
+	static T* instance();
 	//释放类的唯一实例
 	void release();
 protected:
@@ -17,7 +17,7 @@ protected:
 };
 
 template <class T>
-inline T* Singleton<T>::instance()
+T* Singleton<T>::instance()
 {
 	//static T* _instance;
 	if(!_instance) {

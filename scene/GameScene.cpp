@@ -21,6 +21,8 @@ bool GameScene::init()
 	this->addChild(controlLayer, kControlLayer, kControlLayer);
 	int audioID = cocos2d::AudioEngine::play2d("musics/bgm.m4a", true);
 	sMusic->SetMusicMap("bgm", audioID);
+	auto m = new Music();
+	m->SetMusicMap("bgm", audioID);
 	return true;
 }
 
