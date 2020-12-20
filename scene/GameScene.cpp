@@ -1,4 +1,6 @@
 #include "GameScene.h"
+#include "../Def/FileDef.h"
+#include "../file/CsvData.h"
 
 GameScene::GameScene(void)
 {
@@ -11,6 +13,8 @@ GameScene::~GameScene(void)
 
 bool GameScene::init()
 {
+	// load all the file
+	sParseCsv->LoadCsv(MUSIC_FILE_NAME, MUSIC_FILE_PATH);
 	//新建一个GameLayer实例
 	GameLayer *gamelayer = GameLayer::create();
 	//将GameLayer实例添加到场景中
@@ -19,10 +23,14 @@ bool GameScene::init()
 	ControlLayer *controlLayer = ControlLayer::create();
 	//将ControlLayer实例添加到场景中
 	this->addChild(controlLayer, kControlLayer, kControlLayer);
-	int audioID = cocos2d::AudioEngine::play2d("musics/bgm.m4a", true);
-	sMusic->SetMusicMap("bgm", audioID);
-	auto m = new Music();
-	m->SetMusicMap("bgm", audioID);
+	//int audioID = cocos2d::AudioEngine::play2d("musics/bgm.m4a", true);
+	std::string filePath;
+	if (sParseCsv->GetCsvData(MUSIC_FILE_NAME, BGM_FLOOR, filePath)) {
+		std::cout<<"==========> "<<"filePath: "<<filePath<<std::endl;
+		int audioID = cocos2d::AudioEngine::play2d(filePath, true);
+		// 保存bgm对应的ID
+		sMusic->SetMusicMap(BGM_FLOOR, audioID);
+	}
 	return true;
 }
 

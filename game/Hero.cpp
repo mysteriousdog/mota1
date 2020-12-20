@@ -1,4 +1,6 @@
 ﻿#include "Hero.h"
+#include "../file/CsvData.h"
+#include "../Def/FileDef.h"
 
 Hero::Hero()
 {
@@ -252,7 +254,7 @@ void Hero::updateOpenDoorAnimation(float dt)
 void Hero::actWithNPC()
 {
 	int audioId;
-	if (sMusic->getAudioId("bgm", audioId)) {
+	if (sMusic->getAudioId(BGM_FLOOR, audioId)) {
 		AudioEngine::stop(audioId);
 	}
 	isTalking = true;
