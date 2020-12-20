@@ -59,7 +59,7 @@ bool ParseCsv::LoadCsv( std::string fileName,  std::string path)
     std::string filePath = FileUtils::getInstance()->fullPathForFilename(path);
     size_t buffSize = 0;
     std::string buff = FileUtils::getInstance()->getStringFromFile(filePath);
-    std::vector<std::string> vecTab = SplitString(buff, "\r");
+    std::vector<std::string> vecTab = SplitString(buff, "\r\n");
     std::cout<<vecTab.size()<<std::endl;
     for (auto it = vecTab.begin(); it != vecTab.end(); it++) {
         std::cout<<"=========================="<<std::endl;
@@ -71,6 +71,7 @@ bool ParseCsv::LoadCsv( std::string fileName,  std::string path)
         _para->PushData(fileName, splitVec[0], splitVec[1]);
         std::cout<<splitVec[0]<<" ---  "<<splitVec[1]<<std::endl;
     }
+    _para->Show(fileName);
     return true;
 }
 

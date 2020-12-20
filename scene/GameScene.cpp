@@ -31,7 +31,7 @@ bool GameScene::init()
 	// 	// 保存bgm对应的ID
 	// 	sMusic->SetMusicMap(BGM_FLOOR, audioID);
 	// }
-	sMusic->PLayMusic(BGM_FLOOR);
+	sMusic->PLayMusic(BGM_FLOOR, true);
 	return true;
 }
 

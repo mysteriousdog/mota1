@@ -36,13 +36,21 @@ bool Music::SetMusicMap(std::string audioStr, int audioId)
     return false;
 }
 
-void Music::PLayMusic( std::string musicName) const
+void Music::PLayMusic( std::string musicName, bool loop) const
 {
     std::string filePath;
 	if (sParseCsv->GetCsvData(MUSIC_FILE_NAME, musicName, OUT filePath)) {
 		std::cout<<"==========> "<<"filePath: "<<filePath<<std::endl;
-		int audioID = cocos2d::AudioEngine::play2d(filePath, true);
+		int audioID = cocos2d::AudioEngine::play2d(filePath, loop);
 		// 保存bgm对应的ID
 		sMusic->SetMusicMap(musicName, audioID);
+	}
+}
+
+void Music::StopMusic(std::string musicname)
+{
+    int audioId;
+    if (sMusic->getAudioId(BGM_FLOOR, audioId)) {
+		AudioEngine::stop(audioId);
 	}
 }
