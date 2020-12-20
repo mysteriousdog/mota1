@@ -1,4 +1,7 @@
 #include "Music.h"
+#include "../file/CsvData.h"
+#include "../Def/FileDef.h"
+#include "../Def/Def.h"
 //#include <utility>
 DECLARE_SINGLETON_MEMBER(Music);
 
@@ -31,4 +34,15 @@ bool Music::SetMusicMap(std::string audioStr, int audioId)
         return true;
     }
     return false;
+}
+
+void Music::PLayMusic( std::string musicName) const
+{
+    std::string filePath;
+	if (sParseCsv->GetCsvData(MUSIC_FILE_NAME, musicName, OUT filePath)) {
+		std::cout<<"==========> "<<"filePath: "<<filePath<<std::endl;
+		int audioID = cocos2d::AudioEngine::play2d(filePath, true);
+		// 保存bgm对应的ID
+		sMusic->SetMusicMap(musicName, audioID);
+	}
 }

@@ -4,9 +4,13 @@
 /* here we  start define the filename */
 
 #define MUSIC_FILE_NAME "musicMap"
+
 #define BGM_FLOOR "bgm"
+
 #define MUSIC_NPC "npc"
+
 #define MUSIC_ITEM "item"
+
 #define MUSIC_ENEMY "enemy"
 
 /* here we  end define the filename */

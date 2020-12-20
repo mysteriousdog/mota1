@@ -28,7 +28,7 @@ typedef struct CsvData
 		TabData[key] = data;//保存整行的数据
 	}
 
-    bool IsExistFile(const std::string &fileName)
+    bool IsExistFile(const std::string fileName)
     {// 判断文件是否存在
         if (TabData.find(fileName) != TabData.end()) {
             return true;
@@ -36,7 +36,7 @@ typedef struct CsvData
         std::cout<<"in IsExistFile : dos no exists :"<<fileName<<std::endl;
         return false;
     }
-    bool IsExist(std::string &fileName, std::string &head) 
+    bool IsExist(std::string fileName, std::string head) 
     {//判断文件 + head是否存在
         if (IsExistFile(fileName) && TabData[fileName].find(head) != TabData[fileName].end()) {
             return true;
@@ -64,7 +64,7 @@ public:
     ~ParseCsv();
     void Init();
     bool LoadCsv(std::string fileName, std::string path);
-    bool GetCsvData(std::string fileName, std::string head, OUT std::string &value) const;
+    bool GetCsvData(std::string fileName, std::string head, OUT std::string &value);
     std::vector<std::string> SplitString(const std::string &str, const std::string &splitStr);
 
 private:

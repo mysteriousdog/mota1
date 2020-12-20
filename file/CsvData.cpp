@@ -79,7 +79,7 @@ bool ParseCsv::LoadCsv( std::string fileName,  std::string path)
 *@para1: 文件名
 *@para2: csv文件中的key值
 */
-bool ParseCsv::GetCsvData(std::string fileName, std::string head, OUT std::string &value) const
+bool ParseCsv::GetCsvData(std::string fileName, std::string head, OUT std::string &value)
 {
     return _para->GetData(fileName, head, value);
 

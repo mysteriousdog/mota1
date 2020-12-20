@@ -222,6 +222,8 @@ void Hero::pickUpItem()
 	sGlobal->gameLayer->showTip("get an item, hp +100", this->getPosition());
 	//将物品从地图上移除
 	sGlobal->gameMap->getItemLayer()->removeTileAt(targetTileCoord);
+
+	
 }
 //打开门
 void Hero::openDoor(int gid)

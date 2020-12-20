@@ -22,6 +22,6 @@
 #include "util/Singleton.h"
 #include "util/AnimationManager.h"
 #include "util/Global.h"
-#include "util/Music.h"
+#include "Music/Music.h"
 
 #endif

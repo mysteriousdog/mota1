@@ -13,6 +13,7 @@ public:
     ~Music();
     bool getAudioId(std::string audioStr, OUT int& audioId);
     bool SetMusicMap(std::string audioStr, int audioId);
+    void PLayMusic( std::string musicName) const;
 private:
     
     std::map<std::string, int> *musicMap;
